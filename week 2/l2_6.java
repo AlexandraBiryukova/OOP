@@ -132,7 +132,7 @@ public class l2_6 {
                 if (n2 > 0 || n1 > 0)
                     res += " [and] ";
             }
-            if(n2>0||n1>0&&res.indexOf("hundred")==-1&&res.indexOf("thousand")>=0)
+            if((n2>0||n1>0)&&(res.indexOf("hundred")==-1&&res.indexOf("thousand")>=0))
                 res+="[and] ";
             if (n2 == 0)
                 res += Dec_Int(n1) + " ";
