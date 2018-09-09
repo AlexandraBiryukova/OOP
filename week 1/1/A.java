@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import static java.lang.Math.sqrt;
 
-public class second {
+public class A {
     public static void main(String [] args) {
         float a, b;
         double c;
