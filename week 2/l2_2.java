@@ -4,6 +4,7 @@ public class l2_2 {
         public int width;
 
         public StarTriangle(int w){
+
             width=w;
         }
         public String To_String(){

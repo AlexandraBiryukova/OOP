@@ -7,14 +7,17 @@ public class l2_3 {
         public Data(){
             average=0;
             count=0;
+            maxim=0;
         }
-        public void addData(int x){
+        public void addData(double x){
             count++;
             if(maxim<x)
                 maxim=x;
             average+=x;
         }
         public double average(){
+            if(count==0)
+                return 0;
             return average/count;
         }
         public double maximum(){
@@ -30,7 +33,7 @@ public class l2_3 {
             System.out.print("Enter number(Q to quit):");
             str = s.nextLine();
             while (!str.equals("Q")) {
-                int x = Integer.parseInt(str);
+                double x = Double.parseDouble(str);
                 d.addData(x);
                 System.out.print("Enter number(Q to quit):");
                 str = s.nextLine();

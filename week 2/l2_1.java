@@ -8,7 +8,7 @@ public class l2_1 {
             name=s;
             yearOfStudy=a;
         }
-        public String get_name(){
+        public String getName(){
             return name;
         }
         public int get_id(){
@@ -28,7 +28,7 @@ public class l2_1 {
         Student s=new Student("Alex",2018);
         s.id=1;
         System.out.println(s.get_id());
-        System.out.println(s.get_name());
+        System.out.println(s.getName());
         s.incr_year();
         System.out.println(s.yearOfStudy);
     }

@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class l2_6 {
+public class l2_6{
     public static class Numbers {
         public String Dec(int n) {
             String s = "";
@@ -115,7 +115,7 @@ public class l2_6 {
             int n3 = (number - n4 * 1000) / 100;
             int n2 = ((number - n4 * 1000 - n3 * 100) / 10);
             //res=n6+" "+n5+" "+n3+" "+n2+" "+n1;
-            if (n6 == 0)
+            if (n6 == 0&&n5!=0)
                 res += Dec_Int(n5) + " ";
             if (n6 == 1)
                 res += Dec_Int_moreTen(10 + n5) + " ";
