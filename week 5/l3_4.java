@@ -33,8 +33,8 @@ public class l3_4 {
         p.getName();
     }
     public static void main(String[] args){
-        Student   studentObject = new Student();
-        Employee  employeeObject = new Employee();
+        Student studentObject = new Student();
+        Employee employeeObject = new Employee();
         Person ref=studentObject;
         ref.getName();
         ref=employeeObject;

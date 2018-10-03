@@ -30,15 +30,15 @@ public class l3_1 {
             super.setLife(false);
             age=0;
         }
+        public void setAge(int a){age=a;}
+        public int getAge(){return age;}
+
         public Dinosaur(String s,int a,boolean b){
             super(s,b);
             age=a;
 
         }
-        public void setName(String s, int a){
-            setName(s);
-            age=a;
-        }
+
         public void setName(String s, int a,boolean b){
             setName(s);
             age=a;
@@ -50,9 +50,13 @@ public class l3_1 {
 
     }
     public static void main(String[] args){
+        Animal aa=new Dinosaur();
+        System.out.println(aa.toString());
+
         Dinosaur d=new Dinosaur();
-        d.setName("Dino",2);
+        d.setName("Dino");
         System.out.println(d.toString());
+
         Animal a=new Animal("animal",false);
         System.out.println(a.toString());
 

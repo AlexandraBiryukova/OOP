@@ -154,6 +154,8 @@ public class l3_5 {
         Knight kn=new Knight('c',3);
         Knight kn2=new Knight('e',2);
         System.out.println(kn.isLegalMove(kn2));
+        Piece t=new Pawn('a',3);
+        System.out.println(((Pawn) t).isLegalMove(new Pawn('a',4)));
 
 
 

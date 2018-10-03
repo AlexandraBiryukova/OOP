@@ -1,73 +1,84 @@
 public class l3_2 {
     public static abstract class VolumeShapes{
-        double height;
-        double width;
-        double length;
-        String name;
-        public VolumeShapes(String n, double l,double w,double h){
-            length=l;
-            width=w;
-            height=h;
-            name=n;
-        }
-        public String getName(){
-            return name;
-        }
-        public double getVolume() {
-            return length * width * height;
-        }
-        public double getSecArea() {
-            return length * width;
-        }
-        public double getArea() {
-            return length * width * height;
-        }
+         double height;
+         double length;
+        public abstract String getName();
+        public abstract double getVolume();
+        public abstract double getSecArea();
+        public abstract double getArea();
 
     }
 
 
     public static class Cube extends VolumeShapes{
         public Cube(double a){
-            super("CUBE",a,a,a);
+            length=a;
         }
+
+        @Override
+        public String getName() {
+            return "cube";
+        }
+
         public double getArea(){
-            return 6*super.getSecArea();
+            return 6*length*length;
         }
 
+        @Override
+        public double getSecArea() {
+            return length*length;
+        }
 
+        @Override
+        public double getVolume() {
+            return length*length*length;
+        }
     }
     public static class Sphere extends VolumeShapes{
         final static double PI=3.14159;
-        public Sphere(double a){
-            super("SPHERE",a,a,a);
+        public Sphere(double a){ length=a;
         }
-        public double getVolume(){
-            return 4/3*PI*super.getVolume();
+        public String getName() {
+            return "sphere";
         }
+
         public double getArea(){
-            return 4*PI*super.getSecArea();
-        }
-        public double getSecArea(){
-            return PI*super.getSecArea();
+            return 4*PI*length*length;
         }
 
+        @Override
+        public double getSecArea() {
+            return PI*length*length;
+        }
 
+        @Override
+        public double getVolume() {
+            return 4*PI*length*length*length/3;
+        }
     }
     public static class Cylinder extends VolumeShapes{
         final static double PI=3.14159;
         public Cylinder(double a,double h){
-            super("CYLINDER",a,a,h);
+            length=a;
+            height=h;
         }
-        public double getVolume(){
-            return PI*super.getVolume();
-        }
-        public double getArea(){
-            return 2*PI*super.getSecArea()+2*PI*super.getVolume()/width;
-        }
-        public double getSecArea(){
-            return PI*super.getSecArea();
+        public String getName() {
+            return "cylinder";
         }
 
+        public double getArea(){
+            return 2*PI*length*length+2*PI*height*length;
+        }
+
+        @Override
+        public double getSecArea() {
+            return PI*length*length;
+        }
+
+        @Override
+        public double getVolume() {
+            return PI*length*length*height;
+        }
 
     }
 
@@ -88,6 +99,7 @@ public static void main(String[] args){
     System.out.println("SURFACE AREA: "+s1.getArea());
     System.out.println("VOLUME: "+s1.getVolume());
     System.out.println("MAIN SECTION AREA: "+s1.getSecArea());
+
 
 
 
