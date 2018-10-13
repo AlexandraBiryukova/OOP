@@ -33,6 +33,7 @@ public class l3_5 {
             else
                 y=0;
         }
+        public abstract String isLegalMove(Piece p);
 
     }
     public static class Rook extends Piece{
