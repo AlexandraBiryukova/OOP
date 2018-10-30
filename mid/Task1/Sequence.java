@@ -1,4 +1,4 @@
-package Task1;
+package mid.Task1;
 
 public class Sequence {
     private String s;

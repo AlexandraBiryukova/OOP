@@ -1,4 +1,4 @@
-package Task3;
+package mid.Task3;
 
 
 public class Rectangle extends Shape{

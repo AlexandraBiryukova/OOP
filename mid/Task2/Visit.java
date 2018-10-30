@@ -1,4 +1,4 @@
-package Task2;
+package mid.Task2;
 import java.util.Date;
 public class Visit {
     private Customer customer;

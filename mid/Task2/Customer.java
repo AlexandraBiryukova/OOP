@@ -1,4 +1,4 @@
-package Task2;
+package mid.Task2;
 
 public class Customer {
     private String name;

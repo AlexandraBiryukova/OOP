@@ -1,4 +1,4 @@
-package Task2;
+package mid.Task2;
 
 public class DiscountRate {
     private static double serviceDiscountPremium=0.2;

@@ -5,7 +5,7 @@ public class l3_4 {
             name="someone";
         }
         public String getName(){
-            System.out.println("Person name:"+name);
+            System.out.println("Manager name:"+name);
             return name;
         }
 
