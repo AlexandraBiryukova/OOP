@@ -4,7 +4,7 @@ import sis3.ActionSaving;
 
 import java.io.Serializable;
 
-public abstract class Employee extends User implements Serializable,Comparable, ActionSaving {
+public abstract class Employee extends User implements Serializable,Comparable {
     private int phoneNumber;
     private int yearOfWorkOrStudy;
     public Employee(){

@@ -1,5 +1,6 @@
 package sis3.People;
 
+import sis3.ActionSaving;
 import sis3.Data;
 import sis3.Enum.Departments;
 import sis3.MakingOrder;
@@ -15,7 +16,7 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.concurrent.TransferQueue;
 
-public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder {
+public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder, ActionSaving {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;

@@ -80,6 +80,7 @@ public class Admin extends Employee {
                 o.setPassword(p);
                 break;
             case 3:
+                System.out.println("PhoneNumber");
                 Employee e=(Employee)o;
                 int ph=inp.nextInt();
                 e.setPhoneNumber(ph);
