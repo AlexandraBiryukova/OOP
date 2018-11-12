@@ -4,7 +4,7 @@ import sis3.Interfaces.ActionSaving;
 
 import java.io.Serializable;
 
-public abstract class Employee extends User implements Serializable,Comparable, ActionSaving {
+public abstract class Employee extends User {
     private int phoneNumber;
     private int yearOfWorkOrStudy;
     public Employee(){
@@ -33,6 +33,7 @@ public abstract class Employee extends User implements Serializable,Comparable, 
     public void setYearOfWorkOrStudy(int yearOfWork) {
         this.yearOfWorkOrStudy = yearOfWork;
     }
+    @Override
     public int hashcode() {
         return super.hashCode();
     }

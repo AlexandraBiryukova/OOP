@@ -6,7 +6,7 @@ import sis3.Objects.Course;
 import java.io.*;
 import java.util.Date;
 import java.util.Vector;
-public class Manager extends Employee implements Serializable,Cloneable,Comparable {
+public class Manager extends Employee implements ActionSaving {
     private Vector<Employee> subordinates;
 
     public Manager(){
@@ -27,6 +27,7 @@ public class Manager extends Employee implements Serializable,Cloneable,Comparab
         this.subordinates = subordinates;
     }
 
+    @Override
     public int hashcode() {
         return super.hashCode();
     }

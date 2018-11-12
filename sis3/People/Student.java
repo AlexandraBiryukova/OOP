@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Student extends Employee implements Serializable,Cloneable,Comparable{
+public class Student extends Employee implements ActionSaving{
     private Departments department;
     private TreeSet<Course> courses;
     private Vector<Mark> marks;
@@ -129,6 +129,7 @@ public class Student extends Employee implements Serializable,Cloneable,Comparab
         }
     }
 
+    @Override
     public int hashcode() {
         return super.hashCode();
     }

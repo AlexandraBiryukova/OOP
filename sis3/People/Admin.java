@@ -1,13 +1,20 @@
 package sis3.People;
 
+import sis3.Interfaces.ActionSaving;
 import sis3.Objects.*;
 import sis3.Storage.Data;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Date;
 import java.util.Scanner;
 
-public class Admin extends Employee {
+public class Admin extends Employee implements ActionSaving {
     public Admin(){
         super();
+    }
+    public Admin(String n,String s,String l,String p,int num,int year){
+        super(n,s,l,p,num,year);
     }
 
 
@@ -96,4 +103,50 @@ public class Admin extends Employee {
 
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return super.compareTo(o);
+    }
+
+    @Override
+    public int hashcode() {
+        return super.hashcode();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Admin t = (Admin) super.clone();
+        t.setLogin(getLogin());
+        t.setName(getName());
+        t.setPassword(getPassword());
+        t.setPhoneNumber(getPhoneNumber());
+        t.setYearOfWorkOrStudy(getYearOfWorkOrStudy());
+        t.setSurname(getSurname());
+        return t;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public void Saving(String inf) {
+        try {
+            FileWriter to_file = new FileWriter("admin.txt", true);
+            BufferedWriter bw = new BufferedWriter(to_file);
+            Date d = new Date();
+            bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
+            bw.write("admin"+this.getLogin()+inf);
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    }
 }

@@ -1,4 +1,5 @@
 package sis3.People;
+import sis3.Interfaces.ActionSaving;
 import sis3.Storage.Data;
 import sis3.Objects.Order;
 
@@ -8,7 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Executor extends Employee {
+public class Executor extends Employee implements ActionSaving {
     private Vector<Order> orders;
     public Executor(){
         super();
@@ -61,6 +62,42 @@ public class Executor extends Employee {
         for(Order o: Data.orders){
             System.out.println(o);
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public int hashcode() {
+        return super.hashcode();
+    }
+
+    @Override
+    public  Executor clone() throws CloneNotSupportedException {
+        Executor t = (Executor) super.clone();
+        t.setLogin(getLogin());
+        t.setName(getName());
+        t.setPassword(getPassword());
+        t.setPhoneNumber(getPhoneNumber());
+        t.setYearOfWorkOrStudy(getYearOfWorkOrStudy());
+        t.setSurname(getSurname());
+        t.orders=orders;
+        return t;
+
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Executor) {
+            Executor m=(Executor) o;
+            if (super.compareTo((Employee)o) == 0) {
+                return Integer.compare(m.orders.size(),orders.size());
+            }
+            return super.compareTo((Employee)o);
+        }
+        return -1;
     }
 
     @Override

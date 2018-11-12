@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder {
+public class Teacher extends Employee implements ActionSaving,MakingOrder {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -86,6 +86,7 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         }
         return false;
     }
+    @Override
     public int hashcode() {
         return super.hashCode();
     }
@@ -147,7 +148,7 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
     }
 
 
-    public static void viewAllStudents(){
+    public void viewAllStudents(){
         try {
 
             FileInputStream out = new FileInputStream("data.ser");

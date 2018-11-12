@@ -1,10 +1,12 @@
 package sis3.People;
 
+import sis3.Interfaces.ActionSaving;
+import sis3.Interfaces.MakingOrder;
 import sis3.Storage.Data;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable,Comparable {
+public abstract class User implements Serializable,Comparable,Cloneable {
     private String name;
     private String surname;
     private String login;
@@ -67,7 +69,9 @@ public abstract class User implements Serializable,Comparable {
     public String toString(){
         return name+" "+surname;
     }
-
+    public int hashcode() {
+        return super.hashCode();
+    }
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof User){
