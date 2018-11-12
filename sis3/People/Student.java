@@ -1,16 +1,18 @@
 package sis3.People;
 
 
+import sis3.ActionSaving;
 import sis3.Data;
 import sis3.Enum.Departments;
 import sis3.Objects.Course;
 import sis3.Objects.Mark;
 
 import java.io.*;
+import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Student extends Employee implements Serializable,Cloneable,Comparable {
+public class Student extends Employee implements Serializable,Cloneable,Comparable, ActionSaving {
     private Departments department;
     private TreeSet<Course> courses;
     private Vector<Mark> marks;
@@ -151,8 +153,8 @@ public class Student extends Employee implements Serializable,Cloneable,Comparab
         Data.students.add(this);
         Data.save();
     }
-    public void read(){
-        Data r = Data.read();
+    public void get(){
+        Data r = Data.get();
         for (Student t:Data.students
         ) {
             System.out.println(t);
@@ -192,6 +194,21 @@ public class Student extends Employee implements Serializable,Cloneable,Comparab
         t.department=this.department;
         t.marks=this.marks;
         return t;
+    }
+    @Override
+    public void Saving(Admin a) {
+        try {
+            FileWriter to_file = new FileWriter("admin.txt", true);
+            BufferedWriter bw = new BufferedWriter(to_file);
+            Date d = new Date();
+            bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
+            bw.write(a.getLogin()+" added new student"  + this.getName()+" "+getSurname());
+
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
 }
 

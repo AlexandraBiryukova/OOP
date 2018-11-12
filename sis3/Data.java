@@ -28,7 +28,7 @@ public class Data implements Serializable {
             System.out.println("oops");
         }
     }
-    public static  Data read(){
+    public static  Data get(){
         Data d=new Data();
         try {
 

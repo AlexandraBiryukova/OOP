@@ -2,6 +2,7 @@ package sis3.People;
 
 import sis3.Data;
 import sis3.Enum.Departments;
+import sis3.MakingOrder;
 import sis3.Objects.Course;
 import sis3.Objects.CourseFile;
 import sis3.Objects.Mark;
@@ -9,11 +10,12 @@ import sis3.Enum.TeacherStatuses;
 import sis3.Objects.Order;
 
 import java.io.*;
+import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 import java.util.concurrent.TransferQueue;
 
-public class Teacher extends Employee implements Serializable,Comparable,Cloneable {
+public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -134,8 +136,8 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         Data.teachers.add(this);
         Data.save();
     }
-    public void read(){
-        Data r = Data.read();
+    public void get(){
+        Data r = Data.get();
         for (Teacher t:Data.teachers
              ) {
             System.out.println(t);
@@ -223,5 +225,21 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         v.add(o);
         ex.setOrders(v);
 
+    }
+
+    @Override
+    public void Saving(Admin a) {
+        try {
+            FileWriter to_file = new FileWriter("admin.txt", true);
+            BufferedWriter bw = new BufferedWriter(to_file);
+            Date d = new Date();
+            bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
+            bw.write(a.getLogin()+" added new teacher"  + this);
+
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
 }

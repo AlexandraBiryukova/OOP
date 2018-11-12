@@ -10,6 +10,8 @@ public class Admin extends Employee {
         super();
     }
 
+
+
     public void addUser(Object o){
         if(o instanceof Teacher){
             Teacher t=(Teacher)o;
