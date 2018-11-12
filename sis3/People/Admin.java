@@ -47,14 +47,19 @@ public class Admin extends Employee {
         Data.save();
     }
     public void updateUserInfo(User o){
-        System.out.println("You can:" +
+        String s1="You can:" +
                 "1.Change the name\n"+
-                "2.Change the password");
-        if(o instanceof Employee){
-            System.out.println(
-                    "3.Change the phone");
-        }
-
+                "2.Change the password\n"+"3.Change the phone\n" +
+                "4.Change the yearOfStudyOrWork\n";
+        String s2="5.Change the department\n" +
+                "6.Change the status\n";
+        String s3="5.Change the department";
+        String res="";
+        if(o instanceof Teacher)
+            res=s1+s2;
+        if(o instanceof Student)
+            res=s1+s3;
+        System.out.println(res);
         System.out.println("Write the number of command");
         Scanner inp=new Scanner(System.in);
         int a=inp.nextInt();
@@ -77,6 +82,13 @@ public class Admin extends Employee {
                 int ph=inp.nextInt();
                 e.setPhoneNumber(ph);
                 break;
+            case 4:
+                System.out.println("YearOfStudyOrWork");
+                int q=inp.nextInt();
+                Employee ew=(Employee)o;
+                ew.setYearOfWorkOrStudy(q);
+                break;
+
         }
 
     }
