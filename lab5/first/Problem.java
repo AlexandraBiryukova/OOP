@@ -3,7 +3,7 @@ import java.io.*;
 public class Problem {
     static void fromFile(){
         try {
-            FileReader  from_file = new FileReader("scores.txt");
+            FileReader from_file = new FileReader("scores.txt");
             BufferedReader ois=new BufferedReader(from_file);
             String ss=ois.readLine();
             while(ss!=null){
