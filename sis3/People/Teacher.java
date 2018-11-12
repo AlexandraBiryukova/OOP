@@ -16,18 +16,28 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
+    private Vector<String> messages;
 
     public Teacher(){
         super();
         status=TeacherStatuses.NONE;
         department=Departments.NONE;
         courses=new TreeSet<>();
+        messages=new Vector<>();
     }
     public Teacher(String n,String s,String l,String p, int num,int year,Departments d,TeacherStatuses t,TreeSet<Course> v){
         super(n,s,l,p,num,year);
         status=t;
         department=d;
         courses=v;
+    }
+
+    public Vector<String> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Vector<String> messages) {
+        this.messages = messages;
     }
 
     public Departments getDepartment() {
@@ -175,15 +185,21 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         }
     }
     public void addCourseFile(Course s, CourseFile c){
-        if(courses.contains(s))
-            s.getFiles().add(c);
+        if(courses.contains(s)) {
+            TreeSet<CourseFile> ss = s.getFiles();
+            ss.add(c);
+            s.setFiles(ss);
+        }
         else
             System.out.println("You can't add files to this course.");
 
     }
     public void deleteCourseFile(Course s,CourseFile c){
-        if(courses.contains(s)&&s.getFiles().contains(c))
-            s.getFiles().remove(c);
+        if(courses.contains(s)&&s.getFiles().contains(c)){
+            TreeSet<CourseFile> ss = s.getFiles();
+            ss.remove(c);
+            s.setFiles(ss);
+        }
         else
             System.out.println("You can't delete this file.");
     }
@@ -191,7 +207,9 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         boolean found =false;
         for(Course c:this.getCourses()){
             if(c.getStudents().contains(s)){
-                s.getMarks().add(m);
+                Vector<Mark> ss = s.getMarks();
+                ss.add(m);
+                s.setMarks(ss);
                 found=true;
             }
         }

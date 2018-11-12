@@ -77,6 +77,13 @@ public class Manager extends Employee implements Serializable,Cloneable,Comparab
         }
 
     }
+    public void sendMessage(Teacher t,String s){
+        if(Data.teachers.contains(t)) {
+            Vector<String> l=t.getMessages();
+            l.add(s);
+            t.setMessages(l);
+        }
+    }
 
     @Override
     public Manager clone() throws CloneNotSupportedException {
