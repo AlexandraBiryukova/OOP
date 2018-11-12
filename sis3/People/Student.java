@@ -1,6 +1,6 @@
 package sis3.People;
 
-import com.sun.xml.internal.xsom.impl.scd.Step;
+
 import sis3.Data;
 import sis3.Enum.Departments;
 import sis3.Objects.Course;
