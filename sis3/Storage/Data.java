@@ -1,4 +1,4 @@
-package sis3;
+package sis3.Storage;
 
 import sis3.Objects.*;
 import sis3.People.*;

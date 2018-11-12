@@ -1,6 +1,6 @@
 package sis3.People;
 
-import sis3.Data;
+import sis3.Storage.Data;
 
 import java.io.Serializable;
 

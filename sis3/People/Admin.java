@@ -1,7 +1,7 @@
 package sis3.People;
 
-import sis3.*;
 import sis3.Objects.*;
+import sis3.Storage.Data;
 
 import java.util.Scanner;
 

@@ -1,12 +1,12 @@
 package sis3.People;
-import sis3.ActionSaving;
-import sis3.Data;
+import sis3.Interfaces.ActionSaving;
+import sis3.Storage.Data;
 import sis3.Objects.Course;
 
 import java.io.*;
 import java.util.Date;
 import java.util.Vector;
-public class Manager extends Employee implements Serializable,Cloneable,Comparable, ActionSaving {
+public class Manager extends Employee implements Serializable,Cloneable,Comparable {
     private Vector<Employee> subordinates;
 
     public Manager(){
@@ -111,13 +111,13 @@ public class Manager extends Employee implements Serializable,Cloneable,Comparab
         return -1;
     }
     @Override
-    public void Saving(Admin a) {
+    public void Saving() {
         try {
-            FileWriter to_file = new FileWriter("admin.txt", true);
+            FileWriter to_file = new FileWriter("managers.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write(a.getLogin()+" added new manager"  + this.getName()+" "+getSurname());
+            bw.write("manager"+this.getLogin()+" do something");
             bw.close();
 
         } catch (Exception e) {

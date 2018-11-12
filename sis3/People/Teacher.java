@@ -1,9 +1,9 @@
 package sis3.People;
 
-import sis3.ActionSaving;
-import sis3.Data;
+import sis3.Interfaces.ActionSaving;
+import sis3.Storage.Data;
 import sis3.Enum.Departments;
-import sis3.MakingOrder;
+import sis3.Interfaces.MakingOrder;
 import sis3.Objects.Course;
 import sis3.Objects.CourseFile;
 import sis3.Objects.Mark;
@@ -14,9 +14,8 @@ import java.io.*;
 import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
-import java.util.concurrent.TransferQueue;
 
-public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder, ActionSaving {
+public class Teacher extends Employee implements Serializable,Comparable,Cloneable, MakingOrder {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -229,13 +228,13 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
     }
 
     @Override
-    public void Saving(Admin a) {
+    public void Saving() {
         try {
-            FileWriter to_file = new FileWriter("admin.txt", true);
+            FileWriter to_file = new FileWriter("teachers.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write(a.getLogin()+" added new teacher"  + this);
+            bw.write("teacher "+this.getLogin()+"do something ");
 
             bw.close();
 

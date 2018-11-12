@@ -1,13 +1,12 @@
 package sis3.Objects;
 
-import sis3.*;
 import sis3.Enum.Departments;
 import sis3.People.Student;
 import sis3.People.Teacher;
+import sis3.Storage.Data;
 
 import java.io.*;
 import java.util.TreeSet;
-import java.util.Vector;
 
 public class Course implements Serializable {
     private String courseTitle;

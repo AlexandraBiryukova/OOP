@@ -1,9 +1,9 @@
 package sis3.People;
-import sis3.ActionSaving;
-import sis3.Data;
+import sis3.Storage.Data;
 import sis3.Objects.Order;
-import sis3.People.Employee;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
@@ -63,4 +63,18 @@ public class Executor extends Employee {
         }
     }
 
+    @Override
+    public void Saving() {
+        try {
+            FileWriter to_file = new FileWriter("executors.txt", true);
+            BufferedWriter bw = new BufferedWriter(to_file);
+            Date d = new Date();
+            bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
+            bw.write("executor"+this.getLogin()+" logged into the system");
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    }
 }

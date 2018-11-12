@@ -1,10 +1,10 @@
 package sis3.People;
 
-import sis3.ActionSaving;
+import sis3.Interfaces.ActionSaving;
 
 import java.io.Serializable;
 
-public abstract class Employee extends User implements Serializable,Comparable {
+public abstract class Employee extends User implements Serializable,Comparable, ActionSaving {
     private int phoneNumber;
     private int yearOfWorkOrStudy;
     public Employee(){
