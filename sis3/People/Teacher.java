@@ -6,6 +6,7 @@ import sis3.Objects.Course;
 import sis3.Objects.CourseFile;
 import sis3.Objects.Mark;
 import sis3.Enum.TeacherStatuses;
+import sis3.Objects.Order;
 
 import java.io.*;
 import java.util.TreeSet;
@@ -215,6 +216,12 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         }
         if(!found)
             System.out.println("This student is not yours");
+
+    }
+    public void sendOrder(Executor ex,Order o){
+        Vector<Order> v=ex.getOrders();
+        v.add(o);
+        ex.setOrders(v);
 
     }
 }

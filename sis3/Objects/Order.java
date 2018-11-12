@@ -77,6 +77,7 @@ public class Order implements Serializable {
             if(completed)
                 return "completed";
             return "not completed";
+
         }
         public String toString(){
             return "Order: " + orderTitle + "\nActivities.Order's body: " + orderTextBody + "\nCommander: " + sender.getLogin()+
