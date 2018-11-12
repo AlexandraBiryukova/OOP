@@ -12,7 +12,7 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.concurrent.TransferQueue;
 
-public class Teacher extends Employee implements Serializable {
+public class Teacher extends Employee implements Serializable,Comparable,Cloneable {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -75,6 +75,48 @@ public class Teacher extends Employee implements Serializable {
     }
     public int hashcode() {
         return super.hashCode();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Teacher){
+            Teacher t=(Teacher)o;
+            if(super.compareTo((User)t)==0) {
+                if (t.department.compareTo(department) == 0) {
+                    if(t.status.compareTo(status)==0){
+                        if(t.courses.equals(courses))
+                            return 0;
+                        else{
+                            if(t.courses.size()>courses.size())
+                                return -1;
+                            else
+                                return 1;
+                        }
+
+                    }else
+                        return t.status.compareTo(status);
+
+                }else
+                    return t.department.compareTo(department);
+            }else
+                return super.compareTo((User)t);
+        }
+        return -1;
+    }
+
+    @Override
+    public Teacher clone() throws CloneNotSupportedException {
+        Teacher t = (Teacher) super.clone();
+        t.setLogin(getLogin());
+        t.setName(getName());
+        t.setPassword(getPassword());
+        t.setPhoneNumber(getPhoneNumber());
+        t.setYearOfWorkOrStudy(getYearOfWorkOrStudy());
+        t.setSurname(getSurname());
+        t.courses=this.courses;
+        t.department=this.department;
+        t.status=this.status;
+        return t;
     }
 
     public void save(){

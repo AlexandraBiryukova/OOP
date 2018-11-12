@@ -2,7 +2,7 @@ package sis3.People;
 
 import java.io.Serializable;
 
-public abstract class Employee extends User implements Serializable {
+public abstract class Employee extends User implements Serializable,Comparable {
     private int phoneNumber;
     private int yearOfWorkOrStudy;
     public Employee(){
@@ -50,5 +50,26 @@ public abstract class Employee extends User implements Serializable {
             }
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Employee){
+            Employee e=(Employee)o;
+            if(super.compareTo((User)o)==0){
+                if(phoneNumber==e.phoneNumber){
+                    if(yearOfWorkOrStudy>e.yearOfWorkOrStudy)
+                        return 1;
+                    else if(yearOfWorkOrStudy<e.yearOfWorkOrStudy)
+                        return -1;
+                    return 0;
+
+                }else if(phoneNumber>e.phoneNumber)
+                    return 1;
+                else return -1;
+            }
+            return super.compareTo((User)o);
+        }
+        return -1;
     }
 }

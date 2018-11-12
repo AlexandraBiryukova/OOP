@@ -1,5 +1,6 @@
 package sis3.People;
 
+import com.sun.xml.internal.xsom.impl.scd.Step;
 import sis3.Data;
 import sis3.Enum.Departments;
 import sis3.Objects.Course;
@@ -9,7 +10,7 @@ import java.io.*;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Student extends Employee implements Serializable {
+public class Student extends Employee implements Serializable,Cloneable,Comparable {
     private Departments department;
     private TreeSet<Course> courses;
     private Vector<Mark> marks;
@@ -151,5 +152,37 @@ public class Student extends Employee implements Serializable {
         Data.save();
     }
 
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Student){
+            Student s=(Student)o;
+            if(super.compareTo((Employee)o)==0){
+                if(department.compareTo(s.department)==0){
+                    if(courses.size()==s.courses.size()){
+                        return Integer.compare(marks.size(), s.marks.size());
+                    }else return Integer.compare(courses.size(),s.courses.size());
+
+                }else
+                    return department.compareTo(s.department);
+            }else
+                return super.compareTo((Employee)o);
+        }
+        return -1;
+    }
+
+    @Override
+    public Student clone() throws CloneNotSupportedException {
+        Student t=(Student)super.clone();
+        t.setLogin(getLogin());
+        t.setName(getName());
+        t.setPassword(getPassword());
+        t.setPhoneNumber(getPhoneNumber());
+        t.setYearOfWorkOrStudy(getYearOfWorkOrStudy());
+        t.setSurname(getSurname());
+        t.courses=this.courses;
+        t.department=this.department;
+        t.marks=this.marks;
+        return t;
+    }
 }
 

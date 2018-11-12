@@ -5,7 +5,7 @@ import sis3.Objects.Course;
 import java.io.*;
 import java.util.Date;
 import java.util.Vector;
-public class Manager extends Employee implements Serializable {
+public class Manager extends Employee implements Serializable,Cloneable,Comparable {
     private Vector<Employee> subordinates;
 
     public Manager(){
@@ -69,6 +69,28 @@ public class Manager extends Employee implements Serializable {
         Data.save();
     }
 
+    @Override
+    public Manager clone() throws CloneNotSupportedException {
+        Manager t = (Manager) super.clone();
+        t.setLogin(getLogin());
+        t.setName(getName());
+        t.setPassword(getPassword());
+        t.setPhoneNumber(getPhoneNumber());
+        t.setYearOfWorkOrStudy(getYearOfWorkOrStudy());
+        t.setSurname(getSurname());
+        t.subordinates=subordinates;
+        return t;
+    }
 
-
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Manager) {
+            Manager m=(Manager)o;
+            if (super.compareTo((Employee)o) == 0) {
+                return Integer.compare(m.subordinates.size(),subordinates.size());
+            }
+            return super.compareTo((Employee)o);
+        }
+        return -1;
+    }
 }

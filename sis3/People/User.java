@@ -4,7 +4,7 @@ import sis3.Data;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable {
+public abstract class User implements Serializable,Comparable {
     private String name;
     private String surname;
     private String login;
@@ -77,4 +77,17 @@ public abstract class User implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof User) {
+            User u = (User) o;
+            if (this.name.compareTo(u.name) == 0)
+                return this.surname.compareTo(u.surname);
+            else return this.name.compareTo(u.name);
+        }
+        return -1;
+    }
+
+
 }
