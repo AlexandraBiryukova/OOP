@@ -1,14 +1,10 @@
 package sis3;
 
-import sis3.Objects.Course;
-import sis3.People.Manager;
-import sis3.People.Student;
-import sis3.People.Teacher;
-import sis3.People.User;
+import sis3.Objects.*;
+import sis3.People.*;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+
+import java.io.*;
 import java.util.TreeSet;
 
 public class Data implements Serializable {
@@ -18,6 +14,7 @@ public class Data implements Serializable {
     public static TreeSet<Course> courses=new TreeSet<>();
     public static TreeSet<String> logins=new TreeSet<String>();
     public static TreeSet<String> courseNames=new TreeSet<>();
+    public static TreeSet<Order> orders=new TreeSet<Order>();
     public static void save(){
         try {
 
@@ -30,5 +27,19 @@ public class Data implements Serializable {
         } catch (Exception e) {
             System.out.println("oops");
         }
+    }
+    public static  Data read(){
+        Data d=new Data();
+        try {
+
+            FileInputStream out = new FileInputStream("data.ser");
+            ObjectInputStream os = new ObjectInputStream(out);
+             d=(Data)os.readObject();
+            os.close();
+        } catch (Exception e) {
+            System.out.println("oops");
+        }
+        return d;
+
     }
 }

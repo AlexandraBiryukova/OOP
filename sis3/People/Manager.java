@@ -68,6 +68,15 @@ public class Manager extends Employee implements Serializable,Cloneable,Comparab
         Data.managers.add(this);
         Data.save();
     }
+    public void read(){
+        Data r = Data.read();
+        for (Manager t:Data.managers
+        ) {
+            System.out.println(t);
+
+        }
+
+    }
 
     @Override
     public Manager clone() throws CloneNotSupportedException {

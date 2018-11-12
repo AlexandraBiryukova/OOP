@@ -123,6 +123,15 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
         Data.teachers.add(this);
         Data.save();
     }
+    public void read(){
+        Data r = Data.read();
+        for (Teacher t:Data.teachers
+             ) {
+            System.out.println(t);
+
+        }
+
+    }
 
 
     public static void viewAllStudents(){

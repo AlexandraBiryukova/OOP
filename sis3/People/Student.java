@@ -151,6 +151,15 @@ public class Student extends Employee implements Serializable,Cloneable,Comparab
         Data.students.add(this);
         Data.save();
     }
+    public void read(){
+        Data r = Data.read();
+        for (Student t:Data.students
+        ) {
+            System.out.println(t);
+
+        }
+
+    }
 
     @Override
     public int compareTo(Object o) {

@@ -111,5 +111,14 @@ public class Course implements Serializable {
             System.out.println("Course with this name has been already registered in the system");
         }
     }
+    public void read(){
+        Data r = Data.read();
+        for (Course t:Data.courses
+        ) {
+            System.out.println(t);
+
+        }
+
+    }
 
 }
