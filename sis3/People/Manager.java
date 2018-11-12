@@ -111,13 +111,13 @@ public class Manager extends Employee implements Serializable,Cloneable,Comparab
         return -1;
     }
     @Override
-    public void Saving() {
+    public void Saving(String inf) {
         try {
             FileWriter to_file = new FileWriter("managers.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("manager"+this.getLogin()+" do something");
+            bw.write("manager"+this.getLogin()+inf);
             bw.close();
 
         } catch (Exception e) {

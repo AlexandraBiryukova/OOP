@@ -13,7 +13,7 @@ public class Data implements Serializable {
     public static TreeSet<Teacher> teachers=new TreeSet<>();
     public static TreeSet<Course> courses=new TreeSet<>();
     public static TreeSet<String> logins=new TreeSet<String>();
-    public static TreeSet<String> courseNames=new TreeSet<>();
+    public static TreeSet<String> courseNames=new TreeSet<String>();
     public static TreeSet<Order> orders=new TreeSet<Order>();
     public static void save(){
         try {

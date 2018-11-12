@@ -64,13 +64,13 @@ public class Executor extends Employee {
     }
 
     @Override
-    public void Saving() {
+    public void Saving(String inf) {
         try {
             FileWriter to_file = new FileWriter("executors.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("executor"+this.getLogin()+" logged into the system");
+            bw.write("executor"+this.getLogin()+inf);
             bw.close();
 
         } catch (Exception e) {

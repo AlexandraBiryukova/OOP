@@ -228,13 +228,13 @@ public class Teacher extends Employee implements Serializable,Comparable,Cloneab
     }
 
     @Override
-    public void Saving() {
+    public void Saving(String inf) {
         try {
             FileWriter to_file = new FileWriter("teachers.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("teacher "+this.getLogin()+"do something ");
+            bw.write("teacher "+this.getLogin()+inf);
 
             bw.close();
 

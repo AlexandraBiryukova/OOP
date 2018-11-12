@@ -196,14 +196,13 @@ public class Student extends Employee implements Serializable,Cloneable,Comparab
         return t;
     }
     @Override
-    public void Saving() {
+    public void Saving(String inf) {
         try {
             FileWriter to_file = new FileWriter("students.txt", true);
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("student "+this.getLogin()+" do something");
-
+            bw.write("student "+this.getLogin()+inf);
             bw.close();
 
         } catch (Exception e) {
