@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Student extends Employee implements ActionSaving{
+public class Student extends Employee{
     private Departments department;
     private TreeSet<Course> courses;
     private Vector<Mark> marks;
@@ -23,7 +23,7 @@ public class Student extends Employee implements ActionSaving{
         courses=new TreeSet<>();
         marks=new Vector<>();
     }
-    public Student(String n,String s,String l,String p,int num,int year,Departments d,TreeSet<Course> c,Vector<Mark> m){
+    public Student(String n,String s,String l,String p,String num,int year,Departments d,TreeSet<Course> c,Vector<Mark> m){
         super(n,s,l,p,num,year);
         department=d;
         courses=c;
@@ -152,10 +152,11 @@ public class Student extends Employee implements ActionSaving{
     }
     public void save(){
         Data.students.add(this);
-        Data.save();
+        //Data.save();
     }
     public void get(){
-        Data r = Data.get();
+        Data r = new Data();
+        //Data.get(r);
         for (Student t:Data.students
         ) {
             System.out.println(t);

@@ -6,14 +6,14 @@ import sis3.Objects.Course;
 import java.io.*;
 import java.util.Date;
 import java.util.Vector;
-public class Manager extends Employee implements ActionSaving {
+public class Manager extends Employee {
     private Vector<Employee> subordinates;
 
     public Manager(){
         super();
         subordinates=new Vector<>();
     }
-    public Manager(String name,String surname, String l, String p, int num,int year,Vector<Employee> emp){
+    public Manager(String name,String surname, String l, String p, String num,int year,Vector<Employee> emp){
         super(name,surname,l,p,num,year);
         subordinates=emp;
     }
@@ -68,10 +68,11 @@ public class Manager extends Employee implements ActionSaving {
     }
     public void save(){
         Data.managers.add(this);
-        Data.save();
+        //Data.save();
     }
     public void get(){
-        Data r = Data.get();
+        Data r =new Data();
+        //Data.get(r);
         for (Manager t:Data.managers
         ) {
             System.out.println(t);

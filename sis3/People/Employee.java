@@ -4,21 +4,21 @@ import sis3.Interfaces.ActionSaving;
 
 import java.io.Serializable;
 
-public abstract class Employee extends User {
-    private int phoneNumber;
+public abstract class Employee extends User implements Serializable,Comparable, ActionSaving {
+    private String phoneNumber;
     private int yearOfWorkOrStudy;
     public Employee(){
         super();
-        phoneNumber=0;
+        phoneNumber="";
         yearOfWorkOrStudy=0;
     }
-    public Employee(String name,String surname,String l,String p, int num,int year){
+    public Employee(String name,String surname,String l,String p, String num,int year){
         super(name,surname,l,p);
         phoneNumber=num;
         yearOfWorkOrStudy=year;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -26,7 +26,7 @@ public abstract class Employee extends User {
         return yearOfWorkOrStudy;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -48,7 +48,7 @@ public abstract class Employee extends User {
         if(obj instanceof Employee){
             Employee e=(Employee)obj;
             if(super.equals((User)e)){
-                if(e.yearOfWorkOrStudy==yearOfWorkOrStudy&&e.phoneNumber==phoneNumber)
+                if(e.yearOfWorkOrStudy==yearOfWorkOrStudy&&e.phoneNumber.equals(phoneNumber))
                     return true;
             }
         }
@@ -60,16 +60,16 @@ public abstract class Employee extends User {
         if(o instanceof Employee){
             Employee e=(Employee)o;
             if(super.compareTo((User)o)==0){
-                if(phoneNumber==e.phoneNumber){
+                if(phoneNumber.equals(e.phoneNumber)){
                     if(yearOfWorkOrStudy>e.yearOfWorkOrStudy)
                         return 1;
                     else if(yearOfWorkOrStudy<e.yearOfWorkOrStudy)
                         return -1;
                     return 0;
 
-                }else if(phoneNumber>e.phoneNumber)
-                    return 1;
-                else return -1;
+                }else
+                    return(phoneNumber.compareTo(e.phoneNumber));
+
             }
             return super.compareTo((User)o);
         }

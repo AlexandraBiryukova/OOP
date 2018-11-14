@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Executor extends Employee implements ActionSaving {
+public class Executor extends Employee {
     private Vector<Order> orders;
     public Executor(){
         super();
         orders=new Vector<>();
     }
-    public Executor(String name,String surname,String l,String p,int num,int year,Vector<Order>v){
+    public Executor(String name,String surname,String l,String p,String num,int year,Vector<Order>v){
         super(name,surname,l,p,num,year);
         orders=v;
     }
@@ -28,6 +28,14 @@ public class Executor extends Employee implements ActionSaving {
         if(!Data.orders.containsAll(orders)) {
             this.orders = orders;
             Data.orders.addAll(orders);
+        }
+    }
+    public void save(){
+        Data.executors.add(this);
+    }
+    public void get(){
+        for(Executor e:Data.executors){
+            System.out.println(e);
         }
     }
     public void viewNewOrders(){

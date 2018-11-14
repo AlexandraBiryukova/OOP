@@ -10,6 +10,6 @@ public enum Departments implements Serializable {
     KMA,
     FGOGI,
     ISE,
-    NONE
+    NONE;
 
 }

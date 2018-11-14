@@ -5,41 +5,94 @@ import sis3.People.*;
 
 
 import java.io.*;
+import java.util.Date;
 import java.util.TreeSet;
 
 public class Data implements Serializable {
-    public static TreeSet<Manager> managers=new TreeSet<>();
-    public static TreeSet<Student> students=new TreeSet<>();
-    public static TreeSet<Teacher> teachers=new TreeSet<>();
-    public static TreeSet<Course> courses=new TreeSet<>();
-    public static TreeSet<String> logins=new TreeSet<String>();
-    public static TreeSet<String> courseNames=new TreeSet<String>();
-    public static TreeSet<Order> orders=new TreeSet<Order>();
+    public static TreeSet<Manager> managers;
+    public static TreeSet<Student> students;
+    public static TreeSet<Teacher> teachers;
+    public static TreeSet<Course> courses;
+    public static TreeSet<String> courseNames;
+    public static TreeSet<Order> orders;
+    public static TreeSet<Admin> admins;
+    public static TreeSet<Executor> executors;
+    {
+        managers=new TreeSet<>();
+        students=new TreeSet<>();
+        teachers=new TreeSet<>();
+        courses=new TreeSet<>();
+        courseNames=new TreeSet<>();
+        orders=new TreeSet<>();
+        admins=new TreeSet<>();
+        executors=new TreeSet<>();
+    }
     public static void save(){
+        saveAdmins();
+        saveTeachers();
+
+    }
+    public static void get(){
+        getAdmins();
+        getTeachers();
+
+    }
+
+    public static void getAdmins() {
         try {
 
-            FileOutputStream out = new FileOutputStream("data.ser");
+            FileInputStream out = new FileInputStream("admins.out");
+            ObjectInputStream o = new ObjectInputStream(out);
+            TreeSet<Admin> a= (TreeSet<Admin>) o.readObject();
+            admins=a;
+
+            o.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    public static void saveAdmins(){
+        try {
+
+            FileOutputStream out = new FileOutputStream("admins.out");
             ObjectOutputStream os = new ObjectOutputStream(out);
-            Data d=new Data();
-            os.writeObject(d);
+            os.writeObject(admins);
+
+
             os.flush();
             os.close();
         } catch (Exception e) {
-            System.out.println("oops");
+            System.out.println(e.getMessage());
         }
     }
-    public static  Data get(){
-        Data d=new Data();
+    public static void saveTeachers(){
         try {
 
-            FileInputStream out = new FileInputStream("data.ser");
-            ObjectInputStream os = new ObjectInputStream(out);
-             d=(Data)os.readObject();
+            FileOutputStream out = new FileOutputStream("teachers.out");
+            ObjectOutputStream os = new ObjectOutputStream(out);
+            os.writeObject(teachers);
+
+
+            os.flush();
             os.close();
         } catch (Exception e) {
-            System.out.println("oops");
+            System.out.println(e.getMessage());
         }
-        return d;
+    }
+    public static void getTeachers() {
+        try {
+
+            FileInputStream out = new FileInputStream("teachers.out");
+            ObjectInputStream o = new ObjectInputStream(out);
+            TreeSet<Teacher> a= (TreeSet<Teacher>) o.readObject();
+            teachers=a;
+
+            o.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
+
 }

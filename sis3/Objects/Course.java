@@ -105,13 +105,14 @@ public class Course implements Serializable {
     public void save(){
         if(Data.courseNames.contains(this.getCourseTitle())) {
             Data.courses.add(this);
-            Data.save();
+            //Data.save();
         }else{
             System.out.println("Course with this name has been already registered in the system");
         }
     }
     public void get(){
-        Data r = Data.get();
+        Data r = new Data();
+        //Data.get(r);
         for (Course t:Data.courses
         ) {
             System.out.println(t);

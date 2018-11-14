@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Teacher extends Employee implements ActionSaving,MakingOrder {
+public class Teacher extends Employee implements MakingOrder {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -28,7 +28,7 @@ public class Teacher extends Employee implements ActionSaving,MakingOrder {
         courses=new TreeSet<>();
         messages=new Vector<>();
     }
-    public Teacher(String n,String s,String l,String p, int num,int year,Departments d,TeacherStatuses t,TreeSet<Course> v){
+    public Teacher(String n,String s,String l,String p, String num,int year,Departments d,TeacherStatuses t,TreeSet<Course> v){
         super(n,s,l,p,num,year);
         status=t;
         department=d;
@@ -134,11 +134,14 @@ public class Teacher extends Employee implements ActionSaving,MakingOrder {
     }
 
     public void save(){
+        System.out.println("SAVED");
         Data.teachers.add(this);
+        this.Saving(" is added to the system ");
         Data.save();
     }
     public void get(){
-        Data r = Data.get();
+        Data r =new Data();
+        //r=Data.get(r);
         for (Teacher t:Data.teachers
              ) {
             System.out.println(t);
@@ -207,14 +210,17 @@ public class Teacher extends Employee implements ActionSaving,MakingOrder {
         else
             System.out.println("You can't delete this file.");
     }
-    public void setMark(Student s, Mark m){
+    public void setMark(Student s,Course c,Mark m){
         boolean found =false;
-        for(Course c:this.getCourses()){
-            if(c.getStudents().contains(s)){
-                Vector<Mark> ss = s.getMarks();
-                ss.add(m);
-                s.setMarks(ss);
-                found=true;
+        for(Course cc:this.getCourses()){
+            if(cc.toString().equals(c.toString())) {
+                if (cc.getStudents().contains(s)) {
+                    Vector<Mark> ss = s.getMarks();
+                    ss.add(m);
+                    s.setMarks(ss);
+                    found = true;
+                    break;
+                }
             }
         }
         if(!found)
@@ -235,7 +241,7 @@ public class Teacher extends Employee implements ActionSaving,MakingOrder {
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("teacher "+this.getLogin()+inf);
+            bw.write(" teacher "+this.getLogin()+inf);
 
             bw.close();
 

@@ -6,7 +6,7 @@ import sis3.Storage.Data;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable,Comparable,Cloneable {
+public abstract class User implements Serializable,Comparable,Cloneable,ActionSaving {
     private String name;
     private String surname;
     private String login;
@@ -29,17 +29,7 @@ public abstract class User implements Serializable,Comparable,Cloneable {
     }
 
     public void setLogin(String login) {
-        boolean f=false;
-        for(String u:Data.logins){
-            if(u.equals(login))
-                f=true;
-        }
-        if(!f) {
-            this.login = login;
-            Data.logins.add(login);
-        }else{
-            System.out.println("This login is already used in the system");
-        }
+        this.login=login;
     }
 
     public String getPassword() {
