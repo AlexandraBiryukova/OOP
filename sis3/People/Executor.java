@@ -30,8 +30,23 @@ public class Executor extends Employee {
             Data.orders.addAll(orders);
         }
     }
-    public void save(){
-        Data.executors.add(this);
+    public void save(String inf){
+        Data.save();
+        if(inf.equals(" is added to the system ")) {
+            System.out.println("SAVED");
+            Data.executors.add(this);
+            this.Saving(inf);
+        }else{
+            if(inf.contains("changed")){
+                System.out.println("CHANGED");
+                Data.save();
+                this.Saving(inf);
+            }else {
+                System.out.println("DELETED");
+                Data.executors.remove(this);
+                this.Saving(inf);
+            }
+        }
     }
     public void get(){
         for(Executor e:Data.executors){
@@ -115,7 +130,7 @@ public class Executor extends Employee {
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("executor"+this.getLogin()+inf);
+            bw.write(" executor "+this.getLogin()+inf+"\n");
             bw.close();
 
         } catch (Exception e) {

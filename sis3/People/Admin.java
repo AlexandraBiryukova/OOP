@@ -13,15 +13,13 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Admin extends Employee implements ActionSaving {
+public class Admin extends Employee implements ActionSaving{
     public Admin(){
         super();
     }
     public Admin(String n,String s,String l,String p,String num,int year){
         super(n,s,l,p,num,year);
     }
-
-
 
     public void addUser(Object o){
         Scanner inp=new Scanner(System.in);
@@ -88,99 +86,722 @@ public class Admin extends Employee implements ActionSaving {
             }
 
             this.Saving(" added new teacher "+t.getName()+" "+t.getSurname());
-            t.save();
-
-
+            t.save(" is added to the system ");
 
         }
         if(o instanceof Student){
             Student t=(Student)o;
-            t.save();
+            System.out.print("Student's name:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Student's name:");
+                s = inp.nextLine();
+            }
+            t.setName(s);
+            System.out.print("Student's surname:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Student's surname:");
+                s = inp.nextLine();
+            }
+            t.setSurname(s);
+            System.out.print("Student's login:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Student's login:");
+                s = inp.nextLine();
+            }
+            t.setLogin(s);
+            System.out.print("Student's password:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Student's password:");
+                s = inp.nextLine();
+            }
+            t.setPassword(s);
+            System.out.println("Student's department:");
+            System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
+            int a=inp.nextInt();
+            while(!(a>=1&&a<=8)){
+                System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
+                a=inp.nextInt();
+            }
+            for(Departments d:Departments.values() ){
+                if(d.ordinal()==a-1){
+                    t.setDepartment(d);
+                    break;
+                }
+            }
+            this.Saving(" added new student "+t.getName()+" "+t.getSurname());
+            t.save(" is added to the system ");
         }
         if(o instanceof Manager){
             Manager t=(Manager)o;
-            t.save();
+            System.out.print("Manager's name:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Manager's name:");
+                s = inp.nextLine();
+            }
+            t.setName(s);
+            System.out.print("Manager's surname:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Manager's surname:");
+                s = inp.nextLine();
+            }
+            t.setSurname(s);
+            System.out.print("Student's login:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Manager's login:");
+                s = inp.nextLine();
+            }
+            t.setLogin(s);
+            System.out.print("Manager's password:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Manger's password:");
+                s = inp.nextLine();
+            }
+            t.setPassword(s);
+            this.Saving(" added new manager "+t.getName()+" "+t.getSurname());
+            t.save(" is added to the system ");
         }
         if(o instanceof Executor){
             Executor t=(Executor)o;
-            t.save();
+            System.out.print("Executor's name:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Executor's name:");
+                s = inp.nextLine();
+            }
+            t.setName(s);
+            System.out.print("Executor's surname:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Executor's surname:");
+                s = inp.nextLine();
+            }
+            t.setSurname(s);
+            System.out.print("Executor's login:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Executor's login:");
+                s = inp.nextLine();
+            }
+            t.setLogin(s);
+            System.out.print("Executor's password:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format");
+                System.out.print("Executor's password:");
+                s = inp.nextLine();
+            }
+            t.setPassword(s);
+            this.Saving(" added new executor "+t.getName()+" "+t.getSurname());
+            t.save(" is added to the system ");
         }
+        Data.save();
     }
     public void deleteUser(Object o){
+        Scanner inp=new Scanner(System.in);
         if(o instanceof Teacher){
-            Teacher t=(Teacher)o;
-            for (Course c:
-                 Data.courses) {
-                c.getTutors().remove(t);
+            if(Data.teachers.size()>0) {
+                for (Teacher t : Data.teachers) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of teacher you want to delete:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String s = inp.nextLine();
+                    while (s.isEmpty()) {
+                        System.out.println("UNKNOWN LOGIN");
+                        s = inp.nextLine();
+                    }
+                    boolean b = false;
+                    for (Teacher t : Data.teachers) {
+                        if (t.getLogin().equals(s)) {
+                            this.Saving(" deleted teacher " + t.getLogin());
+                            t.save(" is deleted from to system ");
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered teachers in the system");
             }
-            Data.teachers.remove(t);
         }
         if(o instanceof Student){
-            Student t=(Student)o;
-            Data.students.remove(t);
-            for(Course c:Data.courses){
-                c.getStudents().remove(t);
+            if(Data.students.size()>0) {
+                for (Student t : Data.students) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of student you want to delete:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String s = inp.nextLine();
+                    while (s.isEmpty()) {
+                        System.out.println("UNKNOWN LOGIN");
+                        s = inp.nextLine();
+                    }
+                    boolean b = false;
+                    for (Student t : Data.students) {
+                        if (t.getLogin().equals(s)) {
+                            this.Saving(" deleted student " + t.getLogin());
+                            t.save(" is deleted from to system ");
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered students in the system");
             }
         }
         if(o instanceof Manager){
-            Manager t=(Manager)o;
-            Data.managers.remove(t);
+            if(Data.managers.size()>0) {
+                for (Manager t : Data.managers) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of manager you want to delete:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String s = inp.nextLine();
+                    while (s.isEmpty()) {
+                        System.out.println("UNKNOWN LOGIN");
+                        s = inp.nextLine();
+                    }
+                    boolean b = false;
+                    for (Manager t : Data.managers) {
+                        if (t.getLogin().equals(s)) {
+                            this.Saving(" deleted manager " + t.getLogin());
+                            t.save(" is deleted from to system ");
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered managers in the system");
+            }
         }
         if(o instanceof Executor){
-            Executor t=(Executor) o;
-            Data.executors.remove(t);
+            if(Data.executors.size()>0) {
+                for (Executor t : Data.executors) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of executor you want to delete:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String s = inp.nextLine();
+                    while (s.isEmpty()) {
+                        System.out.println("UNKNOWN LOGIN");
+                        s = inp.nextLine();
+                    }
+                    boolean b = false;
+                    for (Executor t : Data.executors) {
+                        if (t.getLogin().equals(s)) {
+                            this.Saving(" deleted executor " + t.getLogin());
+                            t.save(" is deleted from to system ");
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered executors in the system");
+            }
         }
+        Data.save();
 
 
     }
-    public void updateUserInfo(User o){
+    public void updateUserInfo(Object o){
         Scanner inp=new Scanner(System.in);
-        String s1="You can:" +
-                "1.Change the name\n"+
-                "2.Change the password\n"+"3.Change the phone\n" +
-                "4.Change the yearOfStudyOrWork\n";
-        String s2="5.Change the department\n" +
-                "6.Change the status\n";
-        String s3="5.Change the department";
-        String res="";
-        if(o instanceof Teacher)
-            res=s1+s2;
-        if(o instanceof Student)
-            res=s1+s3;
-        System.out.println(res);
-        System.out.println("Write the number of command");
+        if(o instanceof Teacher){
+            if(Data.teachers.size()>0) {
+                for (Teacher t : Data.teachers) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of teacher,\nwhose information you want to change:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String ss = inp.nextLine();
+                    while (ss.isEmpty() && !ss.toLowerCase().equals("exit")) {
+                        ss = inp.nextLine();
+                        if (ss.toLowerCase().equals("exit"))
+                            return;
+                        if (ss.isEmpty()) {
+                            System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                        }
+                    }
+                    boolean b = false;
+                    for (Teacher t : Data.teachers) {
+                        if (t.getLogin().equals(ss)) {
+                            System.out.println(t);
+                            System.out.println("Choose the code of information" +
+                                    "\nyou want to change:\n1. NAME\n2. SURNAME\n3. PHONE NUMBER\n4. 𝗘𝗫𝗜𝗧");
+                            System.out.print("𝖢𝖮𝖣𝖤:");
+                            String s = inp.nextLine();
+                            while (s.isEmpty()) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                            }
+                            int a = Integer.parseInt(s);
+                            while (a != 1 && a != 2 && a != 3 && a != 4 && a != 5) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                                a = Integer.parseInt(s);
+                            }
+                            b = false;
+                            //Admin i=new Admin();
+                            switch (a) {
+                                case 1:
+                                    System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                    String q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    t.setName(q);
+                                    this.Saving(" changed info about teacher " + t.getLogin());
+                                    t.save("name was changed");
+                                    updateUserInfo(o);
+                                    break;
+                                case 2:
+                                    System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF SURNAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about teacher " + t.getLogin());
+                                    t.save("surname was changed");
+                                    t.setSurname(q);
+                                    ;
+                                    updateUserInfo(o);
+                                    break;
+                                case 3:
+                                    System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NUMBER\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about teacher " + t.getLogin());
+                                    t.save("phone number was changed");
+                                    t.setPhoneNumber(q);
+                                    ;
+                                    updateUserInfo(o);
 
-        int a=inp.nextInt();
-        switch(a){
-            case 1:
-                System.out.println("Name:");
-                String n=inp.next();
-                o.setName(n);
-                System.out.println("Surname:");
-                 n=inp.next();
-                o.setSurname(n);
-                break;
-            case 2:
-                System.out.println("New password");
-                String p=inp.next();
-                o.setPassword(p);
-                break;
-            case 3:
-                System.out.println("PhoneNumber");
-                Employee e=(Employee)o;
-                String ph=inp.nextLine();
-                e.setPhoneNumber(ph);
-                break;
-            case 4:
-                System.out.println("YearOfStudyOrWork");
-                int q=inp.nextInt();
-                Employee ew=(Employee)o;
-                ew.setYearOfWorkOrStudy(q);
-                break;
+                                    break;
 
+                                case 4:
+                                    return;
+                            }
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered teachers in the system");
+            }
         }
+        if(o instanceof Student){
+            if(Data.students.size()>0) {
+                for (Student t : Data.students) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of student,\nwhose information you want to change:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String ss = inp.nextLine();
+                    while (ss.isEmpty() && !ss.toLowerCase().equals("exit")) {
+                        ss = inp.nextLine();
+                        if (ss.toLowerCase().equals("exit"))
+                            return;
+                        if (ss.isEmpty()) {
+                            System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                        }
+                    }
+                    boolean b = false;
+                    for (Student t : Data.students) {
+                        if (t.getLogin().equals(ss)) {
+                            System.out.println(t);
+                            System.out.println("Choose the code of information" +
+                                    "\nyou want to change:\n1. NAME\n2. SURNAME\n3. PHONE NUMBER\n4. 𝗘𝗫𝗜𝗧");
+                            System.out.print("𝖢𝖮𝖣𝖤:");
+                            String s = inp.nextLine();
+                            while (s.isEmpty()) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                            }
+                            int a = Integer.parseInt(s);
+                            while (a != 1 && a != 2 && a != 3 && a != 4 && a != 5) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                                a = Integer.parseInt(s);
+                            }
+                            b = false;
+                            //Admin i=new Admin();
+                            switch (a) {
+                                case 1:
+                                    System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                    String q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    t.setName(q);
+                                    this.Saving(" changed info about student " + t.getLogin());
+                                    t.save("name was changed");
+                                    updateUserInfo(o);
+                                    break;
+                                case 2:
+                                    System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF SURNAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about student " + t.getLogin());
+                                    t.save("surname was changed");
+                                    t.setSurname(q);
+                                    ;
+                                    updateUserInfo(o);
+                                    break;
+                                case 3:
+                                    System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NUMBER\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about student " + t.getLogin());
+                                    t.save("phone number was changed");
+                                    t.setPhoneNumber(q);
+                                    ;
+                                    updateUserInfo(o);
 
+                                    break;
+
+                                case 4:
+                                    return;
+                            }
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered students in the system");
+            }
+        }
+        if(o instanceof Manager){
+            if(Data.managers.size()>0) {
+                for (Manager t : Data.managers) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of manager,\nwhose information you want to change:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String ss = inp.nextLine();
+                    while (ss.isEmpty() && !ss.toLowerCase().equals("exit")) {
+                        ss = inp.nextLine();
+                        if (ss.toLowerCase().equals("exit"))
+                            return;
+                        if (ss.isEmpty()) {
+                            System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                        }
+                    }
+                    boolean b = false;
+                    for (Manager t : Data.managers) {
+                        if (t.getLogin().equals(ss)) {
+                            System.out.println(t);
+                            System.out.println("Choose the code of information" +
+                                    "\nyou want to change:\n1. NAME\n2. SURNAME\n3. PHONE NUMBER\n4. 𝗘𝗫𝗜𝗧");
+                            System.out.print("𝖢𝖮𝖣𝖤:");
+                            String s = inp.nextLine();
+                            while (s.isEmpty()) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                            }
+                            int a = Integer.parseInt(s);
+                            while (a != 1 && a != 2 && a != 3 && a != 4 && a != 5) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                                a = Integer.parseInt(s);
+                            }
+                            b = false;
+                            //Admin i=new Admin();
+                            switch (a) {
+                                case 1:
+                                    System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                    String q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    t.setName(q);
+                                    this.Saving(" changed info about manager " + t.getLogin());
+                                    t.save("name was changed");
+                                    updateUserInfo(o);
+                                    break;
+                                case 2:
+                                    System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF SURNAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about manager " + t.getLogin());
+                                    t.save("surname was changed");
+                                    t.setSurname(q);
+                                    ;
+                                    updateUserInfo(o);
+                                    break;
+                                case 3:
+                                    System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NUMBER\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about manager " + t.getLogin());
+                                    t.save("phone number was changed");
+                                    t.setPhoneNumber(q);
+                                    ;
+                                    updateUserInfo(o);
+
+                                    break;
+
+                                case 4:
+                                    return;
+                            }
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered managers in the system");
+            }
+        }
+        if(o instanceof Executor){
+            if(Data.executors.size()>0) {
+                for (Executor t : Data.executors) {
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                }
+                System.out.println("Choose the login of executor,\nwhose information you want to change:");
+                boolean found = false;
+                while (!found) {
+                    System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                    String ss = inp.nextLine();
+                    while (ss.isEmpty() && !ss.toLowerCase().equals("exit")) {
+                        ss = inp.nextLine();
+                        if (ss.toLowerCase().equals("exit"))
+                            return;
+                        if (ss.isEmpty()) {
+                            System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            System.out.print("𝖫𝖮𝖦𝖨𝖭:");
+                        }
+                    }
+                    boolean b = false;
+                    for (Executor t : Data.executors) {
+                        if (t.getLogin().equals(ss)) {
+                            System.out.println(t);
+                            System.out.println("Choose the code of information" +
+                                    "\nyou want to change:\n1. NAME\n2. SURNAME\n3. PHONE NUMBER\n4. 𝗘𝗫𝗜𝗧");
+                            System.out.print("𝖢𝖮𝖣𝖤:");
+                            String s = inp.nextLine();
+                            while (s.isEmpty()) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                            }
+                            int a = Integer.parseInt(s);
+                            while (a != 1 && a != 2 && a != 3 && a != 4 && a != 5) {
+                                System.out.print("𝖢𝖮𝖣𝖤:");
+                                s = inp.nextLine();
+                                a = Integer.parseInt(s);
+                            }
+                            b = false;
+                            //Admin i=new Admin();
+                            switch (a) {
+                                case 1:
+                                    System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                    String q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    t.setName(q);
+                                    this.Saving(" changed info about executor " + t.getLogin());
+                                    t.save("name was changed");
+                                    updateUserInfo(o);
+                                    break;
+                                case 2:
+                                    System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF SURNAME\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about executor " + t.getLogin());
+                                    t.save("surname was changed");
+                                    t.setSurname(q);
+                                    ;
+                                    updateUserInfo(o);
+                                    break;
+                                case 3:
+                                    System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                    q = inp.nextLine();
+                                    while (q.isEmpty()) {
+                                        System.out.println("𝖭𝖤𝖶 𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+                                        q = inp.nextLine();
+                                        if (q.isEmpty())
+                                            System.out.println("INCORRECT TYPE OF NUMBER\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                        if (s.toLowerCase().equals("exit"))
+                                            updateUserInfo(o);
+                                    }
+                                    this.Saving(" changed info about executor " + t.getLogin());
+                                    t.save("phone number was changed");
+                                    t.setPhoneNumber(q);
+                                    ;
+                                    updateUserInfo(o);
+
+                                    break;
+
+                                case 4:
+                                    return;
+                            }
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b)
+                        found = true;
+                    else {
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    }
+                }
+            }else{
+                System.out.println("There are no registered executors in the system");
+            }
+        }
+        Data.save();
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public int compareTo(Object o) {

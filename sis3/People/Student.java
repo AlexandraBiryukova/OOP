@@ -150,13 +150,26 @@ public class Student extends Employee{
         }
         return false;
     }
-    public void save(){
-        Data.students.add(this);
-        //Data.save();
+    public void save(String inf){
+        Data.save();
+        if(inf.equals(" is added to the system ")) {
+            System.out.println("SAVED");
+            Data.students.add(this);
+            this.Saving(inf);
+        }else{
+            if(inf.contains("changed")){
+                System.out.println("CHANGED");
+                Data.save();
+                this.Saving(inf);
+            }else {
+                System.out.println("DELETED");
+                Data.students.remove(this);
+                this.Saving(inf);
+            }
+        }
+
     }
     public void get(){
-        Data r = new Data();
-        //Data.get(r);
         for (Student t:Data.students
         ) {
             System.out.println(t);
@@ -204,7 +217,7 @@ public class Student extends Employee{
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("student "+this.getLogin()+inf);
+            bw.write(" student "+this.getLogin()+inf+"\n");
             bw.close();
 
         } catch (Exception e) {

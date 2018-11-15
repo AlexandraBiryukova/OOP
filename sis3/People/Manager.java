@@ -6,7 +6,7 @@ import sis3.Objects.Course;
 import java.io.*;
 import java.util.Date;
 import java.util.Vector;
-public class Manager extends Employee {
+public class Manager extends Employee implements ActionSaving {
     private Vector<Employee> subordinates;
 
     public Manager(){
@@ -66,9 +66,23 @@ public class Manager extends Employee {
             System.out.println(t);
         }
     }
-    public void save(){
-        Data.managers.add(this);
-        //Data.save();
+    public void save(String inf){
+        Data.save();
+        if(inf.equals(" is added to the system ")) {
+            System.out.println("SAVED");
+            Data.managers.add(this);
+            this.Saving(inf);
+        }else{
+            if(inf.contains("changed")){
+                System.out.println("CHANGED");
+                Data.save();
+                this.Saving(inf);
+            }else {
+                System.out.println("DELETED");
+                Data.managers.remove(this);
+                this.Saving(inf);
+            }
+        }
     }
     public void get(){
         Data r =new Data();
@@ -119,7 +133,7 @@ public class Manager extends Employee {
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write("manager"+this.getLogin()+inf);
+            bw.write(" manager "+this.getLogin()+inf+"\n");
             bw.close();
 
         } catch (Exception e) {

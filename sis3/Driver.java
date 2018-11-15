@@ -1,5 +1,7 @@
 package sis3;
 
+import org.omg.CORBA.INTERNAL;
+import org.omg.PortableInterceptor.INACTIVE;
 import sis3.People.*;
 import sis3.Storage.Data;
 
@@ -36,17 +38,19 @@ public class Driver {
                 break;
             case "exit":
                 Data.save();
-                break;
-            default:
+                return;
+            default: {
                 starting();
+            }
 
         }
 
     }
     private static void adminRegist(Admin a){
-        String s = "";
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
         System.out.println("Please fill next fields:");
+        System.out.println("𝖭𝖠𝖬𝖤: ");
+        String s=input.nextLine();
         while (s.isEmpty()) {
             System.out.println("𝖭𝖠𝖬𝖤: ");
             s = input.nextLine();
@@ -56,8 +60,9 @@ public class Driver {
                 return;
         }
         a.setName(s);
-        s="";
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+        System.out.println("𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
+        s=input.nextLine();
         while (s.isEmpty()) {
             System.out.println("𝖲𝖴𝖱𝖭𝖠𝖬𝖤: ");
             s = input.nextLine();
@@ -67,8 +72,9 @@ public class Driver {
                 return;
         }
         a.setSurname(s);
-        s="";
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+        System.out.println("𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
+        s=input.nextLine();
         while (s.isEmpty()) {
             System.out.println("𝖯𝖧𝖮𝖭𝖤 𝖭𝖴𝖬𝖡𝖤𝖱: ");
             s= input.nextLine();
@@ -78,8 +84,10 @@ public class Driver {
                 return;
         }
         a.setPhoneNumber(s);
-        s="";
+
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+        System.out.println("𝖸𝖤𝖠𝖱 𝖮𝖥 𝖶𝖮𝖱𝖪 𝖮𝖱 𝖲𝖳𝖴𝖣𝖸: ");
+        s=input.nextLine();
         while (s.isEmpty()||Integer.parseInt(s)==0) {
             System.out.println("𝖸𝖤𝖠𝖱 𝖮𝖥 𝖶𝖮𝖱𝖪 𝖮𝖱 𝖲𝖳𝖴𝖣𝖸: ");
             s= input.nextLine();
@@ -89,10 +97,11 @@ public class Driver {
                 return;
         }
         a.setYearOfWorkOrStudy(Integer.parseInt(s));
-        d.admins.add(a);
+        Data.admins.add(a);
         a.Saving(" logged into the system");
         //System.out.println(Data.admins.size());
         Data.save();
+        adminActions(a);
 
     }
     private static void viewAdmins(Admin a){
@@ -113,17 +122,16 @@ public class Driver {
         if(foundP)
             adminActions(a);
         if(!foundP&&!foundL){
-            System.out.println("You haven't been registered yet. If you want to register print 𝖱𝖤𝖲.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-            String choise="";
-            while(!choise.equals("exit")&&!choise.equals("res")) {
+            System.out.println("You haven't been registered yet. If you want to register print 𝖱𝖤𝖦.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            String choise=input.nextLine();
+            while(!choise.toLowerCase().equals("exit")&&!choise.toLowerCase().equals("reg")) {
                 choise=input.nextLine();
-                if (choise.toLowerCase().equals("exit"))
-                    starting();
-                else if (choise.toLowerCase().equals("res"))
-                    adminRegist(a);
-                else
-                    System.out.println("𝖱𝖤𝖲 or 𝖤𝖷𝖨𝖳");
+                System.out.println("𝖱𝖤𝖦 or 𝖤𝖷𝖨𝖳");
             }
+            if (choise.toLowerCase().equals("exit"))
+                starting();
+            else if (choise.toLowerCase().equals("reg"))
+                adminRegist(a);
 
         }
         if(!foundP&&foundL) {
@@ -133,24 +141,63 @@ public class Driver {
 
 
     }
-
     private static void adminActions(Admin i) {
         System.out.println("SELECT COMMAND CODE:\n1. Add user\n2. Delete user\n3. Change user information\n4. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
+        input.nextLine();
         while (a!=1&&a!=2&&a!=3&&a!=4) {
             adminActions(i);
         }
         switch (a){
             case 1:
                 adminAdd(i);
+                adminActions(i);
                 break;
             case 2:
+                adminDel(i);
+                adminActions(i);
                 break;
             case 3:
+                adminChangeInfo(i);
+                adminActions(i);
                 break;
             case 4:
-                starting();
+                adminMode();
+                break;
+        }
+
+    }
+
+    private static void adminChangeInfo(Admin i) {
+        System.out.println("Choose the code of user whose information" +
+                "\nyou want to change:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        String s=input.nextLine();
+        while(s.isEmpty()) {
+            s=input.nextLine();
+
+        }
+        int a= Integer.parseInt(s);
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            s=input.nextLine();
+            a=Integer.parseInt(s);
+        }
+        switch (a){
+            case 1:
+                i.updateUserInfo(new Student());
+                break;
+            case 2:
+                i.updateUserInfo(new Teacher());
+                break;
+            case 3:
+                i.updateUserInfo(new Manager());
+                break;
+            case 4:
+                i.updateUserInfo(new Executor());
+                break;
+            case 5:
+                adminActions(i);
         }
 
     }
@@ -159,9 +206,11 @@ public class Driver {
         System.out.println("Choose the code of user you want to add:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
+
         while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
             a=input.nextInt();
         }
+        input.nextLine();
         //Admin i=new Admin();
         switch (a){
             case 1:
@@ -177,20 +226,59 @@ public class Driver {
                 i.addUser(new Executor());
                 break;
             case 5:
-                return;
+                adminActions(i);
         }
     }
-
+    private static void adminDel(Admin i) {
+        System.out.println("Choose the code of user you want to delete:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            a=input.nextInt();
+        }
+        input.nextLine();
+        //Admin i=new Admin();
+        switch (a){
+            case 1:
+                i.deleteUser(new Student());
+                break;
+            case 2:
+                i.deleteUser(new Teacher());
+                break;
+            case 3:
+                i.deleteUser(new Manager());
+                break;
+            case 4:
+                i.deleteUser(new Executor());
+                break;
+            case 5:
+                adminActions(i);
+        }
+    }
     private static void adminMode() {
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
         System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
-        String alog=input.nextLine();
-        if(alog.toLowerCase().equals("exit"))
+        String alog = input.nextLine();
+        if(alog.isEmpty()) {
+            while (alog.isEmpty() && !alog.toLowerCase().equals("exit")) {
+                System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
+                alog = input.nextLine();
+            }
+        }
+        if (alog.toLowerCase().equals("exit")) {
             starting();
+            return;
+        }
         System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
         String apas=input.nextLine();
-        if(apas.toLowerCase().equals("exit"))
+        while(apas.isEmpty()&& !apas.toLowerCase().equals("exit")) {
+            System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
+            apas = input.nextLine();
+        }
+        if (apas.toLowerCase().equals("exit")) {
             starting();
+            return;
+        }
         Admin user=new Admin();
         user.setLogin(alog);
         user.setPassword(apas);
@@ -199,8 +287,10 @@ public class Driver {
     }
 
 
+
     public static void main(String[] args){
         Data.get();
+        System.out.println(Data.admins.size());
         starting();
 
 

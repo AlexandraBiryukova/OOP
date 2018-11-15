@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Teacher extends Employee implements MakingOrder {
+public class Teacher extends Employee implements MakingOrder,ActionSaving {
     private TeacherStatuses status;
     private Departments department;
     private TreeSet<Course> courses;
@@ -133,11 +133,24 @@ public class Teacher extends Employee implements MakingOrder {
         return t;
     }
 
-    public void save(){
-        System.out.println("SAVED");
-        Data.teachers.add(this);
-        this.Saving(" is added to the system ");
+    public void save(String inf){
         Data.save();
+        if(inf.equals(" is added to the system ")) {
+            System.out.println("SAVED");
+            Data.teachers.add(this);
+            this.Saving(inf);
+        }else{
+            if(inf.contains("changed")){
+                System.out.println("CHANGED");
+                Data.save();
+                this.Saving(inf);
+            }else {
+                System.out.println("DELETED");
+                Data.teachers.remove(this);
+                this.Saving(inf);
+            }
+        }
+
     }
     public void get(){
         Data r =new Data();
@@ -241,7 +254,7 @@ public class Teacher extends Employee implements MakingOrder {
             BufferedWriter bw = new BufferedWriter(to_file);
             Date d = new Date();
             bw.write(d.toLocaleString().substring(0, d.toLocaleString().length() - 3));
-            bw.write(" teacher "+this.getLogin()+inf);
+            bw.write(" teacher "+this.getName()+" "+this.getSurname()+": "+inf+"\n");
 
             bw.close();
 
