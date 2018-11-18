@@ -29,35 +29,53 @@ public class Admin extends Employee implements ActionSaving{
             System.out.print("Teacher's name:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text formatn\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Teacher's name:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setName(s);
             System.out.print("Teacher's surname:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Teacher's surname:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setSurname(s);
             System.out.print("Teacher's login:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Teacher's login:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setLogin(s);
             System.out.print("Teacher's password:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Teacher's password:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setPassword(s);
+            System.out.print("Teacher's phone number:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Teacher's phone number:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setPhoneNumber(s);
             System.out.println("Teacher's department:");
             System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
             int a=inp.nextInt();
@@ -94,35 +112,53 @@ public class Admin extends Employee implements ActionSaving{
             System.out.print("Student's name:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Student's name:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setName(s);
             System.out.print("Student's surname:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Student's surname:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setSurname(s);
             System.out.print("Student's login:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Student's login:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setLogin(s);
             System.out.print("Student's password:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Student's password:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setPassword(s);
+            System.out.print("Student's phone number:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Student's phone number:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setPhoneNumber(s);
             System.out.println("Student's department:");
             System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
             int a=inp.nextInt();
@@ -144,35 +180,53 @@ public class Admin extends Employee implements ActionSaving{
             System.out.print("Manager's name:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Manager's name:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setName(s);
             System.out.print("Manager's surname:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Manager's surname:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setSurname(s);
             System.out.print("Student's login:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Manager's login:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setLogin(s);
             System.out.print("Manager's password:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Manger's password:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setPassword(s);
+            System.out.print("Manager's phone number:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Manager's phone number:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setPhoneNumber(s);
             this.Saving(" added new manager "+t.getName()+" "+t.getSurname());
             t.save(" is added to the system ");
         }
@@ -181,35 +235,53 @@ public class Admin extends Employee implements ActionSaving{
             System.out.print("Executor's name:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Executor's name:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setName(s);
             System.out.print("Executor's surname:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Executor's surname:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setSurname(s);
             System.out.print("Executor's login:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Executor's login:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setLogin(s);
             System.out.print("Executor's password:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text format");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Executor's password:");
                 s = inp.nextLine();
             }
+            if (s.toLowerCase().equals("exit"))
+                return;
             t.setPassword(s);
+            System.out.print("Exwcutor's phone number:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Executor's phone number:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setPhoneNumber(s);
             this.Saving(" added new executor "+t.getName()+" "+t.getSurname());
             t.save(" is added to the system ");
         }
@@ -228,9 +300,11 @@ public class Admin extends Employee implements ActionSaving{
                     System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                     String s = inp.nextLine();
                     while (s.isEmpty()) {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                         s = inp.nextLine();
                     }
+                    if (s.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Teacher t : Data.teachers) {
                         if (t.getLogin().equals(s)) {
@@ -243,7 +317,7 @@ public class Admin extends Employee implements ActionSaving{
                     if (b)
                         found = true;
                     else {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                     }
                 }
             }else{
@@ -261,9 +335,11 @@ public class Admin extends Employee implements ActionSaving{
                     System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                     String s = inp.nextLine();
                     while (s.isEmpty()) {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                         s = inp.nextLine();
                     }
+                    if (s.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Student t : Data.students) {
                         if (t.getLogin().equals(s)) {
@@ -276,7 +352,7 @@ public class Admin extends Employee implements ActionSaving{
                     if (b)
                         found = true;
                     else {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                     }
                 }
             }else{
@@ -294,9 +370,11 @@ public class Admin extends Employee implements ActionSaving{
                     System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                     String s = inp.nextLine();
                     while (s.isEmpty()) {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                         s = inp.nextLine();
                     }
+                    if (s.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Manager t : Data.managers) {
                         if (t.getLogin().equals(s)) {
@@ -309,7 +387,7 @@ public class Admin extends Employee implements ActionSaving{
                     if (b)
                         found = true;
                     else {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                     }
                 }
             }else{
@@ -327,9 +405,11 @@ public class Admin extends Employee implements ActionSaving{
                     System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                     String s = inp.nextLine();
                     while (s.isEmpty()) {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                         s = inp.nextLine();
                     }
+                    if (s.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Executor t : Data.executors) {
                         if (t.getLogin().equals(s)) {
@@ -342,7 +422,7 @@ public class Admin extends Employee implements ActionSaving{
                     if (b)
                         found = true;
                     else {
-                        System.out.println("UNKNOWN LOGIN");
+                        System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                     }
                 }
             }else{
@@ -358,7 +438,7 @@ public class Admin extends Employee implements ActionSaving{
         if(o instanceof Teacher){
             if(Data.teachers.size()>0) {
                 for (Teacher t : Data.teachers) {
-                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname()+" "+t.getPhoneNumber());
                 }
                 System.out.println("Choose the login of teacher,\nwhose information you want to change:");
                 boolean found = false;
@@ -367,13 +447,14 @@ public class Admin extends Employee implements ActionSaving{
                     String ss = inp.nextLine();
                     while (ss.isEmpty() && !ss.toLowerCase().equals("exit")) {
                         ss = inp.nextLine();
-                        if (ss.toLowerCase().equals("exit"))
-                            return;
+
                         if (ss.isEmpty()) {
                             System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                             System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                         }
                     }
+                    if (ss.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Teacher t : Data.teachers) {
                         if (t.getLogin().equals(ss)) {
@@ -422,10 +503,10 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setSurname(q);
                                     this.Saving(" changed info about teacher " + t.getLogin());
                                     t.save("surname was changed");
-                                    t.setSurname(q);
-                                    ;
+
                                     updateUserInfo(o);
                                     break;
                                 case 3:
@@ -439,9 +520,10 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setPhoneNumber(q);
                                     this.Saving(" changed info about teacher " + t.getLogin());
                                     t.save("phone number was changed");
-                                    t.setPhoneNumber(q);
+
                                     ;
                                     updateUserInfo(o);
 
@@ -467,7 +549,7 @@ public class Admin extends Employee implements ActionSaving{
         if(o instanceof Student){
             if(Data.students.size()>0) {
                 for (Student t : Data.students) {
-                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname()+" "+t.getPhoneNumber());
                 }
                 System.out.println("Choose the login of student,\nwhose information you want to change:");
                 boolean found = false;
@@ -483,6 +565,8 @@ public class Admin extends Employee implements ActionSaving{
                             System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                         }
                     }
+                    if (ss.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Student t : Data.students) {
                         if (t.getLogin().equals(ss)) {
@@ -531,9 +615,10 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setSurname(q);
                                     this.Saving(" changed info about student " + t.getLogin());
                                     t.save("surname was changed");
-                                    t.setSurname(q);
+
                                     ;
                                     updateUserInfo(o);
                                     break;
@@ -548,9 +633,10 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setPhoneNumber(q);
                                     this.Saving(" changed info about student " + t.getLogin());
                                     t.save("phone number was changed");
-                                    t.setPhoneNumber(q);
+
                                     ;
                                     updateUserInfo(o);
 
@@ -576,7 +662,7 @@ public class Admin extends Employee implements ActionSaving{
         if(o instanceof Manager){
             if(Data.managers.size()>0) {
                 for (Manager t : Data.managers) {
-                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname());
+                    System.out.println("𝗅𝗈𝗀𝗂𝗇: " + t.getLogin() + " 𝗂𝗇𝖿𝗈:" + t.getName() + " " + t.getSurname()+" "+t.getPhoneNumber());
                 }
                 System.out.println("Choose the login of manager,\nwhose information you want to change:");
                 boolean found = false;
@@ -592,6 +678,8 @@ public class Admin extends Employee implements ActionSaving{
                             System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                         }
                     }
+                    if (ss.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Manager t : Data.managers) {
                         if (t.getLogin().equals(ss)) {
@@ -640,9 +728,10 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setSurname(q);
                                     this.Saving(" changed info about manager " + t.getLogin());
                                     t.save("surname was changed");
-                                    t.setSurname(q);
+
                                     ;
                                     updateUserInfo(o);
                                     break;
@@ -657,9 +746,9 @@ public class Admin extends Employee implements ActionSaving{
                                         if (s.toLowerCase().equals("exit"))
                                             updateUserInfo(o);
                                     }
+                                    t.setPhoneNumber(q);
                                     this.Saving(" changed info about manager " + t.getLogin());
                                     t.save("phone number was changed");
-                                    t.setPhoneNumber(q);
                                     ;
                                     updateUserInfo(o);
 
@@ -701,6 +790,8 @@ public class Admin extends Employee implements ActionSaving{
                             System.out.print("𝖫𝖮𝖦𝖨𝖭:");
                         }
                     }
+                    if (ss.toLowerCase().equals("exit"))
+                        return;
                     boolean b = false;
                     for (Executor t : Data.executors) {
                         if (t.getLogin().equals(ss)) {
@@ -735,7 +826,7 @@ public class Admin extends Employee implements ActionSaving{
                                     }
                                     t.setName(q);
                                     this.Saving(" changed info about executor " + t.getLogin());
-                                    t.save("name was changed");
+                                    t.save(" name was changed");
                                     updateUserInfo(o);
                                     break;
                                 case 2:
@@ -750,7 +841,7 @@ public class Admin extends Employee implements ActionSaving{
                                             updateUserInfo(o);
                                     }
                                     this.Saving(" changed info about executor " + t.getLogin());
-                                    t.save("surname was changed");
+                                    t.save(" surname was changed");
                                     t.setSurname(q);
                                     ;
                                     updateUserInfo(o);

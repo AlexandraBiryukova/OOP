@@ -74,13 +74,16 @@ public class Order implements Serializable {
             return super.hashCode();
         }
         public String confirmation() {
+            if(accepted)
+                return "ACCEPTED";
             if(completed)
-                return "completed";
-            return "not completed";
+                return "COMPLETED";
+            return "NEW";
+
 
         }
         public String toString(){
-            return "Order: " + orderTitle + "\nActivities.Order's body: " + orderTextBody + "\nCommander: " + sender.getLogin()+
+            return "Order: " + orderTitle + "\nActivity: " + orderTextBody + "\nCommander: " + sender.getLogin()+
                     "\nConfirmation state: " + confirmation() + "\nExecution Date: " + executionDate;
         }
 

@@ -2,6 +2,7 @@ package sis3;
 
 import org.omg.CORBA.INTERNAL;
 import org.omg.PortableInterceptor.INACTIVE;
+import sis3.Objects.Order;
 import sis3.People.*;
 import sis3.Storage.Data;
 
@@ -25,7 +26,7 @@ public class Driver {
         switch (user) {
             case "admin":
                 System.out.println("Hello, Admin!");
-                adminMode();
+                userMode(new Admin());
                 break;
             case "student":
                 System.out.println("Hello, Student!");
@@ -35,6 +36,10 @@ public class Driver {
                 break;
             case "executor":
                 System.out.println("Hello, Executor!");
+                userMode(new Executor());
+                break;
+            case "manager":
+                System.out.println("Hello, Manager!");
                 break;
             case "exit":
                 Data.save();
@@ -46,6 +51,8 @@ public class Driver {
         }
 
     }
+
+
     private static void adminRegist(Admin a){
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
         System.out.println("Please fill next fields:");
@@ -136,7 +143,7 @@ public class Driver {
         }
         if(!foundP&&foundL) {
             System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
-            adminMode();
+            userMode(a);
         }
 
 
@@ -163,7 +170,7 @@ public class Driver {
                 adminActions(i);
                 break;
             case 4:
-                adminMode();
+                userMode(i);
                 break;
         }
 
@@ -255,7 +262,7 @@ public class Driver {
                 adminActions(i);
         }
     }
-    private static void adminMode() {
+    private static void userMode(User aaa) {
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
         System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
         String alog = input.nextLine();
@@ -279,13 +286,156 @@ public class Driver {
             starting();
             return;
         }
-        Admin user=new Admin();
-        user.setLogin(alog);
-        user.setPassword(apas);
-        viewAdmins(user);
+        if(aaa instanceof Admin) {
+            Admin h=new Admin();
+            h.setLogin(alog);
+            h.setPassword(apas);
+            viewAdmins(h);
+        }
+        if(aaa instanceof Executor){
+            Executor h=new Executor();
+            h.setLogin(alog);
+            h.setPassword(apas);
+            viewExecutors(h);
+        }
+
+
 
     }
 
+    private static void viewExecutors(Executor a) {
+        boolean foundL=false,foundP=false;
+        for(Executor ad:d.executors) {
+            if (ad.getLogin().equals(a.getLogin())) {
+                foundL=true;
+                if(ad.getPassword().equals(a.getPassword())) {
+                    a=ad;
+                    System.out.println("Hello, " + ad.getName() + "!");
+                    ad.Saving(" logged into the system");
+                    foundP= true;
+                    break;
+                }
+
+            }
+        }
+        if(foundP)
+            exActions(a);
+        if(!foundP&&!foundL){
+            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            String choise=input.nextLine();
+            while(!choise.toLowerCase().equals("exit")) {
+                choise=input.nextLine();
+                System.out.println("𝖤𝖷𝖨𝖳");
+            }
+            starting();
+
+
+        }
+        if(!foundP&&foundL) {
+            System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
+            userMode(a);
+        }
+    }
+
+    private static void exActions(Executor i) {
+        System.out.println("SELECT COMMAND CODE:\n1. View new orders\n2. View done orders\n3. View accepted orders\n4. View all orders\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        input.nextLine();
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            exActions(i);;
+        }
+        switch (a){
+            case 1:
+                System.out.println("𝖭𝖤𝖶 𝖮𝖱𝖣𝖤𝖱𝖲:");
+                if(i.getOrders().size()==0)
+                    System.out.println("You haven't got any orders.");
+                else {
+                    for (Order o : i.getOrders()) {
+                        if(!o.isAccepted())
+                            System.out.println(o);
+                        System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                        String s=input.nextLine();
+                        while(s.isEmpty()&&!s.toLowerCase().equals("a")&&!s.toLowerCase().equals("r")&&!s.toLowerCase().equals("exit")){
+                            System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            s=input.nextLine();
+
+                        }
+                        if(s.toLowerCase().equals("exit"))
+                            return;
+                        if(s.toLowerCase().equals("a")) {
+                            o.setAccepted(true);
+                            System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣");
+                        }
+                        else
+                            System.out.println("𝖱𝖤𝖩𝖤𝖢𝖳𝖤𝖣");
+
+                    }
+                    exActions(i);
+                }
+                break;
+            case 2:
+                System.out.println("𝖣𝖮𝖭𝖤 𝖮𝖱𝖣𝖤𝖱𝖲:");
+                if(i.getOrders().size()==0)
+                    System.out.println("You haven't got any orders.");
+                else {
+                    for (Order o : i.getOrders()) {
+                        if (o.isCompleted())
+                            System.out.println(o);
+
+                    }
+                }System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                String s = input.nextLine();
+                    while(!s.toLowerCase().equals("exit")) {
+                        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                        s = input.nextLine();
+                    }
+                    exActions(i);
+
+                break;
+            case 3:
+                System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣 𝖮𝖱𝖣𝖤𝖱𝖲:");
+                if(i.getOrders().size()==0)
+                    System.out.println("You haven't got any orders.");
+                else {
+                    for (Order o : i.getOrders()) {
+                        if (o.isAccepted())
+                            System.out.println(o);
+
+                    }
+                }
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = input.nextLine();
+                while(!s.toLowerCase().equals("exit")) {
+                    System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                    s = input.nextLine();
+                }
+                exActions(i);
+
+                break;
+            case 4:
+                System.out.println("𝖠𝖫𝖫 𝖮𝖱𝖣𝖤𝖱𝖲:");
+                if(i.getOrders().size()==0)
+                    System.out.println("You haven't got any orders.");
+                else {
+                    for (Order o : i.getOrders()) {
+                        System.out.println(o);
+                    }
+                }
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = input.nextLine();
+                while(!s.toLowerCase().equals("exit")) {
+                    System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                    s = input.nextLine();
+                }
+                exActions(i);
+                break;
+            case 5:
+                userMode(i);
+                break;
+        }
+
+    }
 
 
     public static void main(String[] args){
