@@ -78,11 +78,17 @@ public class Student extends Employee{
             boolean b = false;
             for (Course t : Data.courses) {
                 if (t.getCourseTitle().equals(s)) {
-                    this.courses.add(t);
-                    String inf=" has been registered to the " + t.getCourseTitle()+" course";
-                    this.Saving(inf);
-                    b = true;
-                    break;
+                    if(this.courses.contains(t)) {
+                        System.out.println("You have been already registered to this course");
+                        b=true;
+                    }else {
+                        this.courses.add(t);
+                        String inf = " has been registered to the " + t.getCourseTitle() + " course";
+                        this.Saving(inf);
+                        Data.save();
+                        b = true;
+                        break;
+                    }
                 }
             }
             if (b)
@@ -126,9 +132,10 @@ public class Student extends Employee{
             System.out.println("This teacher isn't from this course");
     }
     public void viewMarkForCourse(Course s){
+        System.out.println(s.getCourseTitle());
+        System.out.println("𝗆𝖺𝗋𝗄𝗌: ");
         if(courses.contains(s)){
             boolean b=false;
-            System.out.println("𝗆𝖺𝗋𝗄𝗌: ");
             for (Mark m:marks){
                 if(m.getCourse().getCourseTitle().equals(s.getCourseTitle())){
                     System.out.print("⊢"+m+"⊣ ");
@@ -137,7 +144,6 @@ public class Student extends Employee{
             }
             if(!b){
                 System.out.println("NO MARKS");
-                System.out.println();
             }
         }else{
             System.out.println("You are not registered to this course");

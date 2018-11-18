@@ -40,7 +40,7 @@ public abstract class Employee extends User implements Serializable,Comparable, 
 
     @Override
     public String toString() {
-        return super.toString()+" "+phoneNumber+" Year : "+yearOfWorkOrStudy;
+        return super.toString()+" "+phoneNumber+" Year: "+yearOfWorkOrStudy;
     }
 
     @Override

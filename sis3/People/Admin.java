@@ -29,7 +29,7 @@ public class Admin extends Employee implements ActionSaving{
             System.out.print("Teacher's name:");
             s=inp.nextLine();
             while(s.isEmpty()) {
-                System.out.println("Wrong text formatn\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                 System.out.print("Teacher's name:");
                 s = inp.nextLine();
             }
@@ -76,6 +76,16 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setPhoneNumber(s);
+            System.out.print("Teacher's year of work:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Teacher's year of work:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setYearOfWorkOrStudy(Integer.parseInt(s));
             System.out.println("Teacher's department:");
             System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
             int a=inp.nextInt();
@@ -159,6 +169,16 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setPhoneNumber(s);
+            System.out.print("Student's year of study:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Student's year of study:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setYearOfWorkOrStudy(Integer.parseInt(s));
             System.out.println("Student's department:");
             System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
             int a=inp.nextInt();
@@ -197,7 +217,7 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setSurname(s);
-            System.out.print("Student's login:");
+            System.out.print("Manager's login:");
             s=inp.nextLine();
             while(s.isEmpty()) {
                 System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
@@ -227,6 +247,16 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setPhoneNumber(s);
+            System.out.print("Manager's year of work:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Manager's year of work:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setYearOfWorkOrStudy(Integer.parseInt(s));
             this.Saving(" added new manager "+t.getName()+" "+t.getSurname());
             t.save(" is added to the system ");
         }
@@ -272,7 +302,7 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setPassword(s);
-            System.out.print("Exwcutor's phone number:");
+            System.out.print("Executor's phone number:");
             s=inp.nextLine();
             while(s.isEmpty()) {
                 System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
@@ -282,6 +312,16 @@ public class Admin extends Employee implements ActionSaving{
             if (s.toLowerCase().equals("exit"))
                 return;
             t.setPhoneNumber(s);
+            System.out.print("Executor's year of work:");
+            s=inp.nextLine();
+            while(s.isEmpty()) {
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                System.out.print("Executor's year of work:");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            t.setYearOfWorkOrStudy(Integer.parseInt(s));
             this.Saving(" added new executor "+t.getName()+" "+t.getSurname());
             t.save(" is added to the system ");
         }

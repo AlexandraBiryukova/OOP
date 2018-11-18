@@ -31,8 +31,11 @@ public class Data implements Serializable {
         saveStudents();
         saveManagers();
         saveExecutors();
+        saveCourses();
 
     }
+
+
 
 
     public static void get(){
@@ -41,7 +44,33 @@ public class Data implements Serializable {
         getManagers();
         getExecutors();
         getStudents();
+        getCourses();
 
+    }
+    private static void saveCourses() {
+        try {
+
+            FileOutputStream out = new FileOutputStream("courses.out");
+            ObjectOutputStream os = new ObjectOutputStream(out);
+            os.writeObject(courses);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    private static void getCourses() {
+        try {
+
+            FileInputStream out = new FileInputStream("courses.out");
+            ObjectInputStream o = new ObjectInputStream(out);
+            TreeSet<Course> a= (TreeSet<Course>) o.readObject();
+            courses=a;
+
+            o.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     private static void getExecutors() {
         try {

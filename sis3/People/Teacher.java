@@ -72,7 +72,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
 
     @Override
     public String toString() {
-        return super.toString()+" "+department+" "+ status+" "+courses.toString();
+        return super.toString()+" "+department+" "+ status;
     }
 
     @Override
@@ -98,14 +98,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
             if(super.compareTo((User)t)==0) {
                 if (t.department.compareTo(department) == 0) {
                     if(t.status.compareTo(status)==0){
-                        if(t.courses.equals(courses))
-                            return 0;
-                        else{
-                            if(t.courses.size()>courses.size())
-                                return -1;
-                            else
-                                return 1;
-                        }
+                        return t.courses.toString().compareTo(courses.toString());
 
                     }else
                         return t.status.compareTo(status);
@@ -144,7 +137,16 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                 System.out.println("CHANGED");
                 Data.save();
                 this.Saving(inf);
-            }else {
+            }else if(inf.contains(" is added to the course")){
+                System.out.println("ADDED");
+                Data.save();
+                this.Saving(inf);
+            } else if(inf.contains("received")){
+                System.out.println("SENDED");
+                Data.save();
+                this.Saving(inf);
+            }
+            else{
                 System.out.println("DELETED");
                 Data.teachers.remove(this);
                 this.Saving(inf);
@@ -197,12 +199,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
         }
     }
     public void addCourse(Course s){
-        if(!Data.courseNames.contains(s.getCourseTitle())) {
             courses.add(s);
-            s.save();
-        }else{
-            System.out.println("Course with this name has been already registered in the system");
-        }
     }
     public void addCourseFile(Course s, CourseFile c){
         if(courses.contains(s)) {
@@ -261,5 +258,8 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
         } catch (Exception e) {
             System.out.println("error");
         }
+    }
+    public void addMess(String s){
+        messages.add(s);
     }
 }

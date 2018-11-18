@@ -41,6 +41,7 @@ public class Driver {
                 break;
             case "manager":
                 System.out.println("Hello, Manager!");
+                userMode(new Manager());
                 break;
             case "exit":
                 Data.save();
@@ -91,8 +92,73 @@ public class Driver {
             Student s=(Student)aaa;
             viewStudents(s);
         }
+        if(aaa instanceof Manager){
+            Manager m=(Manager)aaa;
+            viewManagers(m);
+        }
 
 
+
+    }
+
+    private static void viewManagers(Manager a) {
+        boolean foundL=false,foundP=false;
+        for(Manager ad:d.managers) {
+            if (ad.getLogin().equals(a.getLogin())) {
+                foundL=true;
+                if(ad.getPassword().equals(a.getPassword())) {
+                    a=ad;
+                    System.out.println("Hello, " + ad.getName() + "!");
+                    ad.Saving(" logged into the system");
+                    foundP= true;
+                    break;
+                }
+
+            }
+        }
+        if(foundP)
+            mActions(a);
+        if(!foundP&&!foundL){
+            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            String choise=input.nextLine();
+            while(!choise.toLowerCase().equals("exit")) {
+                choise=input.nextLine();
+                System.out.println("𝖤𝖷𝖨𝖳");
+            }
+            starting();
+
+
+        }
+    }
+    private static void mActions(Manager i) {
+        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View teachers\n3. View students\n4. Send message to the teacher\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        input.nextLine();
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            mActions(i);
+        }
+        switch (a) {
+            case 1:
+                i.addCourse();
+                mActions(i);
+                break;
+            case 2:
+                i.viewTeachers();
+                mActions(i);
+                break;
+            case 3:
+                i.viewStudents();
+                mActions(i);
+                break;
+            case 4:
+                i.sendMessage();
+                mActions(i);
+                break;
+            case 5:
+                userMode(i);
+
+        }
 
     }
 
@@ -126,7 +192,6 @@ public class Driver {
         }
 
     }
-
     private static void stActions(Student i) {
         System.out.println("SELECT COMMAND CODE:\n1. Register to the course\n2. View courses\n3. View transcript\n4. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
@@ -138,12 +203,15 @@ public class Driver {
         switch (a) {
             case 1:
                 i.registerToCourse();
+                stActions(i);
                 break;
             case 2:
                 i.viewAllCourses();
+                stActions(i);
                 break;
             case 3:
                 i.viewTranscript();
+                stActions(i);
                 break;
             case 4:
                 userMode(i);
@@ -432,7 +500,7 @@ public class Driver {
 
     public static void main(String[] args){
         Data.get();
-        //System.out.println(Data.admins.size());
+        System.out.println(Data.courses.size());
         starting();
 
 

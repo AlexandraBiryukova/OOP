@@ -8,7 +8,7 @@ import sis3.Storage.Data;
 import java.io.*;
 import java.util.TreeSet;
 
-public class Course implements Serializable {
+public class Course implements Serializable,Cloneable,Comparable {
     private String courseTitle;
     private TreeSet<Teacher> tutors;
     private TreeSet<Student> students;
@@ -49,13 +49,8 @@ public class Course implements Serializable {
     }
 
     public void setCourseTitle(String courseTitle) {
-        if(!Data.courseNames.contains(courseTitle)) {
             this.courseTitle = courseTitle;
-            Data.courseNames.add(courseTitle);
-        }
-        else{
-            System.out.println("Course with this name has been already registered in the system");
-        }
+
     }
 
 
@@ -69,19 +64,20 @@ public class Course implements Serializable {
     }
 
     public void setStudents(TreeSet<Student> students) {
-        if(Data.students.containsAll(students))
+
             this.students = students;
-        else
-            System.out.println("Not all students are registered in the system");
+
     }
 
 
 
     public void setTutors(TreeSet<Teacher> tutors) {
-        if(Data.teachers.containsAll(tutors))
             this.tutors = tutors;
-        else
-            System.out.println("Not all teachers are registered in the system");
+
+
+    }
+    public void addTeacher(Teacher s){
+        tutors.add(s);
 
     }
     public int hashcode() {
@@ -90,16 +86,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        String tres="";
-        for(Teacher t:tutors){
-            tres+=t+"\n";
-
-        }
-        String fres="";
-        for(CourseFile c:files){
-            fres+=c+"\n";
-        }
-        return "𝗍𝗂𝗍𝗅𝖾: "+courseTitle +"𝖽𝖾𝗉𝖺𝗋𝗍𝗆𝖾𝗇𝗍:"+department+ "\n𝗍𝖾𝖺𝖼𝗁𝖾𝗋𝗌:\n"+tres+"\n𝖿𝗂𝗅𝖾𝗌:\n"+ fres;
+        return "𝗍𝗂𝗍𝗅𝖾: "+courseTitle +" 𝖽𝖾𝗉𝖺𝗋𝗍𝗆𝖾𝗇𝗍: "+department+ "\n𝗍𝖾𝖺𝖼𝗁𝖾𝗋𝗌:\n"+tutors.toString()+"\n𝖿𝗂𝗅𝖾𝗌:\n"+ files.toString();
     }
 
     @Override
@@ -111,24 +98,48 @@ public class Course implements Serializable {
         }
         return false;
     }
-    public void save(){
-        if(Data.courseNames.contains(this.getCourseTitle())) {
-            Data.courses.add(this);
-            //Data.save();
-        }else{
-            System.out.println("Course with this name has been already registered in the system");
+
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Course){
+            Course c=(Course)o;
+            if(this.courseTitle.compareTo(c.courseTitle)==0) {
+                if (department == c.department) {
+                    if (tutors.equals(c.getTutors())) {
+                        if (students.equals(c.getStudents())) {
+                            if (files.equals(c.getFiles())) {
+                                return 0;
+                            }
+                            if (files.size() > c.files.size())
+                                return 1;
+                            return -1;
+                        }
+                        if (students.size() > c.students.size())
+                            return 1;
+                        return -1;
+
+                    }
+                    if (tutors.size() > c.tutors.size())
+                        return 1;
+                    return -1;
+                }
+                return department.compareTo(c.department);
+            }
+            return this.courseTitle.compareTo(c.courseTitle);
         }
-    }
-    public void get(){
-        Data r = new Data();
-        //Data.get(r);
-        for (Course t:Data.courses
-        ) {
-            System.out.println(t);
-
-        }
-
+        return -1;
     }
 
+    @Override
+    protected Course clone() throws CloneNotSupportedException {
+        Course t = (Course)super.clone();
+        t.setCourseTitle(getCourseTitle());
+        t.department=this.department;
+        t.tutors=this.tutors;
+        t.students=students;
+        t.files=files;
+        return t;
 
+    }
 }
