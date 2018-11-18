@@ -90,7 +90,16 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return courseTitle +" "+department+ " with teachers:"+tutors+", files: "+ files;
+        String tres="";
+        for(Teacher t:tutors){
+            tres+=t+"\n";
+
+        }
+        String fres="";
+        for(CourseFile c:files){
+            fres+=c+"\n";
+        }
+        return "𝗍𝗂𝗍𝗅𝖾: "+courseTitle +"𝖽𝖾𝗉𝖺𝗋𝗍𝗆𝖾𝗇𝗍:"+department+ "\n𝗍𝖾𝖺𝖼𝗁𝖾𝗋𝗌:\n"+tres+"\n𝖿𝗂𝗅𝖾𝗌:\n"+ fres;
     }
 
     @Override

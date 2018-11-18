@@ -9,6 +9,7 @@ import sis3.Objects.Mark;
 
 import java.io.*;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -57,29 +58,52 @@ public class Student extends Employee{
     public Departments getDepartment() {
         return department;
     }
-    public void registerToCourse(Course s){
-        if(courses.contains(s))
-            System.out.println("You have been already registered to this course");
-        else{
-            if(Data.courses.contains(s)){
-                courses.add(s);
-                System.out.println("Registration is successful");
-            }else{
-                System.out.println("This course isn't registered in the system");
-
+    public void registerToCourse(){
+        Scanner inp=new Scanner(System.in);
+        if(Data.courses.size()>0) {
+        for (Course t : Data.courses) {
+            System.out.println("𝗍𝗂𝗍𝗅𝖾: " + t.getCourseTitle());
+        }
+        System.out.println("Choose the title of course you want to register in:");
+        boolean found = false;
+        while (!found) {
+            System.out.print("𝖳𝖨𝖳𝖫𝖤:");
+            String s = inp.nextLine();
+            while (s.isEmpty()) {
+                System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                s = inp.nextLine();
+            }
+            if (s.toLowerCase().equals("exit"))
+                return;
+            boolean b = false;
+            for (Course t : Data.courses) {
+                if (t.getCourseTitle().equals(s)) {
+                    this.courses.add(t);
+                    String inf=" has been registered to the " + t.getCourseTitle()+" course";
+                    this.Saving(inf);
+                    b = true;
+                    break;
+                }
+            }
+            if (b)
+                found = true;
+            else {
+                System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
             }
         }
+    }else{
+        System.out.println("There are no registered courses in the system");
     }
-    public void viewOwnCourses(){
-        for(Course s:courses){
-            System.out.println(s.getCourseTitle());
-        }
     }
-
     public void viewAllCourses(){
-        for(Course s:Data.courses){
-            System.out.println(s.getCourseTitle());
-        }
+        if(Data.courses.size()>0) {
+            for (Course s : Data.courses) {
+                System.out.println(s);
+                this.viewMarkForCourse(s);
+            }
+
+        }else
+            System.out.println("There are no registered courses in the system");
     }
     public void viewCourseFiles(Course s){
         if(Data.courses.contains(s)){
@@ -103,30 +127,29 @@ public class Student extends Employee{
     }
     public void viewMarkForCourse(Course s){
         if(courses.contains(s)){
-            System.out.println(s.getCourseTitle());
             boolean b=false;
+            System.out.println("𝗆𝖺𝗋𝗄𝗌: ");
             for (Mark m:marks){
                 if(m.getCourse().getCourseTitle().equals(s.getCourseTitle())){
-                    System.out.print(m+" ");
+                    System.out.print("⊢"+m+"⊣ ");
                     b=true;
                 }
             }
             if(!b){
                 System.out.println("NO MARKS");
+                System.out.println();
             }
         }else{
             System.out.println("You are not registered to this course");
         }
     }
     public void viewTranscript(){
-        for(Course s:courses){
-            System.out.println(s.getCourseTitle());
-            for(Mark m:marks){
-                if(m.getCourse().getCourseTitle().equals(s.getCourseTitle()))
-                    System.out.print(m+" ");
+        if(courses.size()>0) {
+            for (Course s : courses) {
+                viewMarkForCourse(s);
             }
-            System.out.println();
-        }
+        }else
+            System.out.println("You haven't been registered to any courses");
     }
 
     @Override
@@ -136,7 +159,7 @@ public class Student extends Employee{
 
     @Override
     public String toString() {
-        return super.toString()+department;
+        return super.toString()+" "+department;
     }
 
     @Override

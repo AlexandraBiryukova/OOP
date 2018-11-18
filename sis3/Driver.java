@@ -30,6 +30,7 @@ public class Driver {
                 break;
             case "student":
                 System.out.println("Hello, Student!");
+                userMode(new Student());
                 break;
             case "teacher":
                 System.out.println("Hello, Teacher!");
@@ -52,6 +53,104 @@ public class Driver {
 
     }
 
+    private static void userMode(User aaa) {
+        System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+        System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
+        String alog = input.nextLine();
+        if(alog.isEmpty()) {
+            while (alog.isEmpty() && !alog.toLowerCase().equals("exit")) {
+                System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
+                alog = input.nextLine();
+            }
+        }
+        if (alog.toLowerCase().equals("exit")) {
+            starting();
+            return;
+        }
+        System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
+        String apas=input.nextLine();
+        while(apas.isEmpty()&& !apas.toLowerCase().equals("exit")) {
+            System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
+            apas = input.nextLine();
+        }
+        if (apas.toLowerCase().equals("exit")) {
+            starting();
+            return;
+        }
+        aaa.setPassword(apas);
+        aaa.setLogin(alog);
+        if(aaa instanceof Admin) {
+            Admin h=(Admin)aaa;
+            viewAdmins(h);
+        }
+        if(aaa instanceof Executor){
+            Executor h=(Executor)aaa;
+            viewExecutors(h);
+        }
+        if( aaa instanceof Student){
+            Student s=(Student)aaa;
+            viewStudents(s);
+        }
+
+
+
+    }
+
+    private static void viewStudents(Student a) {
+        boolean foundL=false,foundP=false;
+        for(Student ad:d.students) {
+            if (ad.getLogin().equals(a.getLogin())) {
+                foundL=true;
+                if(ad.getPassword().equals(a.getPassword())) {
+                    a=ad;
+                    System.out.println("Hello, " + ad.getName() + "!");
+                    ad.Saving(" logged into the system");
+                    foundP= true;
+                    break;
+                }
+
+            }
+        }
+        if(foundP)
+            stActions(a);
+        if(!foundP&&!foundL){
+            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            String choise=input.nextLine();
+            while(!choise.toLowerCase().equals("exit")) {
+                choise=input.nextLine();
+                System.out.println("𝖤𝖷𝖨𝖳");
+            }
+            starting();
+
+
+        }
+
+    }
+
+    private static void stActions(Student i) {
+        System.out.println("SELECT COMMAND CODE:\n1. Register to the course\n2. View courses\n3. View transcript\n4. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        input.nextLine();
+        while (a!=1&&a!=2&&a!=3&&a!=4) {
+            stActions(i);
+        }
+        switch (a) {
+            case 1:
+                i.registerToCourse();
+                break;
+            case 2:
+                i.viewAllCourses();
+                break;
+            case 3:
+                i.viewTranscript();
+                break;
+            case 4:
+                userMode(i);
+
+        }
+
+    }
 
     private static void adminRegist(Admin a){
         System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
@@ -105,6 +204,7 @@ public class Driver {
         }
         a.setYearOfWorkOrStudy(Integer.parseInt(s));
         Data.admins.add(a);
+        a.Saving(" is added to the sistem");
         a.Saving(" logged into the system");
         //System.out.println(Data.admins.size());
         Data.save();
@@ -175,7 +275,6 @@ public class Driver {
         }
 
     }
-
     private static void adminChangeInfo(Admin i) {
         System.out.println("Choose the code of user whose information" +
                 "\nyou want to change:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
@@ -208,7 +307,6 @@ public class Driver {
         }
 
     }
-
     private static void adminAdd(Admin i) {
         System.out.println("Choose the code of user you want to add:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
@@ -262,46 +360,8 @@ public class Driver {
                 adminActions(i);
         }
     }
-    private static void userMode(User aaa) {
-        System.out.println("(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-        System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
-        String alog = input.nextLine();
-        if(alog.isEmpty()) {
-            while (alog.isEmpty() && !alog.toLowerCase().equals("exit")) {
-                System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
-                alog = input.nextLine();
-            }
-        }
-        if (alog.toLowerCase().equals("exit")) {
-            starting();
-            return;
-        }
-        System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
-        String apas=input.nextLine();
-        while(apas.isEmpty()&& !apas.toLowerCase().equals("exit")) {
-            System.out.print("𝖯𝖠𝖲𝖲𝖶𝖮𝖱𝖣: ");
-            apas = input.nextLine();
-        }
-        if (apas.toLowerCase().equals("exit")) {
-            starting();
-            return;
-        }
-        if(aaa instanceof Admin) {
-            Admin h=new Admin();
-            h.setLogin(alog);
-            h.setPassword(apas);
-            viewAdmins(h);
-        }
-        if(aaa instanceof Executor){
-            Executor h=new Executor();
-            h.setLogin(alog);
-            h.setPassword(apas);
-            viewExecutors(h);
-        }
-
-
-
-    }
+    
+    
 
     private static void viewExecutors(Executor a) {
         boolean foundL=false,foundP=false;
@@ -336,98 +396,29 @@ public class Driver {
             userMode(a);
         }
     }
-
     private static void exActions(Executor i) {
         System.out.println("SELECT COMMAND CODE:\n1. View new orders\n2. View done orders\n3. View accepted orders\n4. View all orders\n5. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
         input.nextLine();
         while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
-            exActions(i);;
+            exActions(i);
         }
         switch (a){
             case 1:
-                System.out.println("𝖭𝖤𝖶 𝖮𝖱𝖣𝖤𝖱𝖲:");
-                if(i.getOrders().size()==0)
-                    System.out.println("You haven't got any orders.");
-                else {
-                    for (Order o : i.getOrders()) {
-                        if(!o.isAccepted())
-                            System.out.println(o);
-                        System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-                        String s=input.nextLine();
-                        while(s.isEmpty()&&!s.toLowerCase().equals("a")&&!s.toLowerCase().equals("r")&&!s.toLowerCase().equals("exit")){
-                            System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-                            s=input.nextLine();
-
-                        }
-                        if(s.toLowerCase().equals("exit"))
-                            return;
-                        if(s.toLowerCase().equals("a")) {
-                            o.setAccepted(true);
-                            System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣");
-                        }
-                        else
-                            System.out.println("𝖱𝖤𝖩𝖤𝖢𝖳𝖤𝖣");
-
-                    }
+                i.viewNewOrders();
                     exActions(i);
-                }
                 break;
             case 2:
-                System.out.println("𝖣𝖮𝖭𝖤 𝖮𝖱𝖣𝖤𝖱𝖲:");
-                if(i.getOrders().size()==0)
-                    System.out.println("You haven't got any orders.");
-                else {
-                    for (Order o : i.getOrders()) {
-                        if (o.isCompleted())
-                            System.out.println(o);
-
-                    }
-                }System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                String s = input.nextLine();
-                    while(!s.toLowerCase().equals("exit")) {
-                        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                        s = input.nextLine();
-                    }
-                    exActions(i);
-
+                i.viewDoneOrd();
+                exActions(i);
                 break;
             case 3:
-                System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣 𝖮𝖱𝖣𝖤𝖱𝖲:");
-                if(i.getOrders().size()==0)
-                    System.out.println("You haven't got any orders.");
-                else {
-                    for (Order o : i.getOrders()) {
-                        if (o.isAccepted())
-                            System.out.println(o);
-
-                    }
-                }
-                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                s = input.nextLine();
-                while(!s.toLowerCase().equals("exit")) {
-                    System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                    s = input.nextLine();
-                }
+               i.viewAcceptedOrd();
                 exActions(i);
-
                 break;
             case 4:
-                System.out.println("𝖠𝖫𝖫 𝖮𝖱𝖣𝖤𝖱𝖲:");
-                if(i.getOrders().size()==0)
-                    System.out.println("You haven't got any orders.");
-                else {
-                    for (Order o : i.getOrders()) {
-                        System.out.println(o);
-                    }
-                }
-                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                s = input.nextLine();
-                while(!s.toLowerCase().equals("exit")) {
-                    System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
-                    s = input.nextLine();
-                }
+                i.viewAcceptedOrd();
                 exActions(i);
                 break;
             case 5:
@@ -436,11 +427,12 @@ public class Driver {
         }
 
     }
+    
 
 
     public static void main(String[] args){
         Data.get();
-        System.out.println(Data.admins.size());
+        //System.out.println(Data.admins.size());
         starting();
 
 

@@ -25,10 +25,8 @@ public class Executor extends Employee {
     }
 
     public void setOrders(Vector<Order> orders) {
-        if(!Data.orders.containsAll(orders)) {
             this.orders = orders;
-            Data.orders.addAll(orders);
-        }
+
     }
     public void save(String inf){
         Data.save();
@@ -54,35 +52,96 @@ public class Executor extends Employee {
         }
     }
     public void viewNewOrders(){
-        for (Order o:Data.orders){
-            if(!o.isAccepted()){
-                System.out.println(o);
-                System.out.println("Accept or reject?");
-                Scanner s=new Scanner(System.in);
-                String res=s.nextLine();
-                if(res.toUpperCase()=="ACCEPT")
-                    o.setAccepted(true);
-            }
+        Scanner input=new Scanner(System.in);
+        System.out.println("𝖭𝖤𝖶 𝖮𝖱𝖣𝖤𝖱𝖲:");
+        if(this.getOrders().size()==0)
+            System.out.println("You haven't got any orders.");
+        else {
+            for (Order o : getOrders()) {
+                if (!o.isAccepted())
+                    System.out.println(o);
+                System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                String s = input.nextLine();
+                while (s.isEmpty() && !s.toLowerCase().equals("a") && !s.toLowerCase().equals("r") && !s.toLowerCase().equals("exit")) {
+                    System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = input.nextLine();
 
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                if (s.toLowerCase().equals("a")) {
+                    o.setAccepted(true);
+                    System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣");
+                } else
+                    System.out.println("𝖱𝖤𝖩𝖤𝖢𝖳𝖤𝖣");
+
+            }
+        }
+        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+        String s = input.nextLine();
+        while(!s.toLowerCase().equals("exit")) {
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            s = input.nextLine();
+        }for(Order o: orders){
+            System.out.println(o);
         }
     }
     public void doOrder(Order o){
         o.setCompleted(true);
     }
     public void viewDoneOrd(){
-        for(Order o:Data.orders){
-            if(o.isCompleted())
-                System.out.println(o);
+        Scanner input=new Scanner(System.in);
+        System.out.println("𝖣𝖮𝖭𝖤 𝖮𝖱𝖣𝖤𝖱𝖲:");
+        if(getOrders().size()==0)
+            System.out.println("You haven't got any orders.");
+        else {
+            for (Order o : getOrders()) {
+                if (o.isCompleted())
+                    System.out.println(o);
+
+            }
+        }System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+        String s = input.nextLine();
+        while(!s.toLowerCase().equals("exit")) {
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            s = input.nextLine();
         }
     }
     public void viewAcceptedOrd(){
-        for(Order o:Data.orders){
-            if(o.isAccepted())
-                System.out.println(o);
+        Scanner input=new Scanner(System.in);
+        System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣 𝖮𝖱𝖣𝖤𝖱𝖲:");
+        if(getOrders().size()==0)
+            System.out.println("You haven't got any orders.");
+        else {
+            for (Order o : getOrders()) {
+                if (o.isAccepted())
+                    System.out.println(o);
+
+            }
+        }
+        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+        String s = input.nextLine();
+        while(!s.toLowerCase().equals("exit")) {
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            s = input.nextLine();
         }
     }
     public void viewAllOrders(){
-        for(Order o: Data.orders){
+        Scanner input=new Scanner(System.in);
+        System.out.println("𝖠𝖫𝖫 𝖮𝖱𝖣𝖤𝖱𝖲:");
+        if(getOrders().size()==0)
+            System.out.println("You haven't got any orders.");
+        else {
+            for (Order o : getOrders()) {
+                System.out.println(o);
+            }
+        }
+        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+        String s = input.nextLine();
+        while(!s.toLowerCase().equals("exit")) {
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            s = input.nextLine();
+        }for(Order o: orders){
             System.out.println(o);
         }
     }

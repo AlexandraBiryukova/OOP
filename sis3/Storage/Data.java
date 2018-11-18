@@ -14,7 +14,6 @@ public class Data implements Serializable {
     public static TreeSet<Teacher> teachers;
     public static TreeSet<Course> courses;
     public static TreeSet<String> courseNames;
-    public static TreeSet<Order> orders;
     public static TreeSet<Admin> admins;
     public static TreeSet<Executor> executors;
     static {
@@ -23,7 +22,6 @@ public class Data implements Serializable {
         teachers=new TreeSet<Teacher>();
         courses=new TreeSet<Course>();
         courseNames=new TreeSet<String>();
-        orders=new TreeSet<Order>();
         admins=new TreeSet<Admin>();
         executors=new TreeSet<Executor>();
     }
