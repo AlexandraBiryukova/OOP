@@ -96,8 +96,73 @@ public class Driver {
             Manager m=(Manager)aaa;
             viewManagers(m);
         }
+        if(aaa instanceof Teacher){
+            Teacher t=(Teacher)aaa;
+            viewTeachers(t);
+        }
 
 
+
+    }
+
+    private static void viewTeachers(Teacher a) {
+        boolean foundL=false,foundP=false;
+        for(Teacher ad:d.teachers) {
+            if (ad.getLogin().equals(a.getLogin())) {
+                foundL=true;
+                if(ad.getPassword().equals(a.getPassword())) {
+                    a=ad;
+                    System.out.println("Hello, " + ad.getName() + "!");
+                    ad.Saving(" logged into the system");
+                    foundP= true;
+                    break;
+                }
+
+            }
+        }
+        if(foundP)
+            tActions(a);
+        if(!foundP&&!foundL){
+            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            String choise=input.nextLine();
+            while(!choise.toLowerCase().equals("exit")) {
+                choise=input.nextLine();
+                System.out.println("𝖤𝖷𝖨𝖳");
+            }
+            starting();
+
+
+        }
+    }
+
+    private static void tActions(Teacher i) {
+        //System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View teachers\n3. View students\n4. Send message to the teacher\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        input.nextLine();
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            tActions(i);
+        }
+        switch (a) {
+            case 1:
+
+                tActions(i);
+                break;
+            case 2:
+                tActions(i);
+                break;
+            case 3:
+
+                tActions(i);
+                break;
+            case 4:
+
+                tActions(i);
+                break;
+            case 5:
+                userMode(i);
+
+        }
 
     }
 
@@ -202,7 +267,11 @@ public class Driver {
         }
         switch (a) {
             case 1:
-                i.registerToCourse();
+                try {
+                    i.registerToCourse();
+                }catch (SizeException e){
+                    System.out.println(e.getMessage()+"courses");
+                }
                 stActions(i);
                 break;
             case 2:
@@ -432,6 +501,7 @@ public class Driver {
     
 
     private static void viewExecutors(Executor a) {
+
         boolean foundL=false,foundP=false;
         for(Executor ad:d.executors) {
             if (ad.getLogin().equals(a.getLogin())) {

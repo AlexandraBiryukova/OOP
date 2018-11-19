@@ -2,6 +2,7 @@ package sis3.People;
 
 
 import sis3.Interfaces.ActionSaving;
+import sis3.SizeException;
 import sis3.Storage.Data;
 import sis3.Enum.Departments;
 import sis3.Objects.Course;
@@ -58,7 +59,7 @@ public class Student extends Employee{
     public Departments getDepartment() {
         return department;
     }
-    public void registerToCourse(){
+    public void registerToCourse() throws SizeException {
         Scanner inp=new Scanner(System.in);
         if(Data.courses.size()>0) {
         for (Course t : Data.courses) {
@@ -98,7 +99,7 @@ public class Student extends Employee{
             }
         }
     }else{
-        System.out.println("There are no registered courses in the system");
+        throw new SizeException();
     }
     }
     public void viewAllCourses(){
