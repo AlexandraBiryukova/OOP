@@ -28,6 +28,9 @@ public class Executor extends Employee {
             this.orders = orders;
 
     }
+    public void addOrder(Order o){
+        orders.add(o);
+    }
     public void save(String inf){
         Data.save();
         if(inf.equals(" is added to the system ")) {
@@ -39,7 +42,12 @@ public class Executor extends Employee {
                 System.out.println("CHANGED");
                 Data.save();
                 this.Saving(inf);
-            }else {
+            }
+            else if(inf.contains("order")){
+                Data.save();
+                this.Saving(inf);
+            }
+            else{
                 System.out.println("DELETED");
                 Data.executors.remove(this);
                 this.Saving(inf);
@@ -54,28 +62,31 @@ public class Executor extends Employee {
     public void viewNewOrders(){
         Scanner input=new Scanner(System.in);
         System.out.println("𝖭𝖤𝖶 𝖮𝖱𝖣𝖤𝖱𝖲:");
-        if(this.getOrders().size()==0)
-            System.out.println("You haven't got any orders.");
-        else {
+        boolean b=false;
             for (Order o : getOrders()) {
-                if (!o.isAccepted())
+                if (!o.isAccepted()) {
+                    b=true;
                     System.out.println(o);
-                System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-                String s = input.nextLine();
-                while (s.isEmpty() && !s.toLowerCase().equals("a") && !s.toLowerCase().equals("r") && !s.toLowerCase().equals("exit")) {
                     System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-                    s = input.nextLine();
+                    String s = input.nextLine();
+                    while (s.isEmpty() && !s.toLowerCase().equals("a") && !s.toLowerCase().equals("r") && !s.toLowerCase().equals("exit")) {
+                        System.out.println("𝗔𝗖𝗖𝗘𝗣𝗧 𝗢𝗥 𝗥𝗘𝗝𝗘𝗖𝗧?(A or R)\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                        s = input.nextLine();
 
+                    }
+                    if (s.toLowerCase().equals("exit"))
+                        return;
+                    if (s.toLowerCase().equals("a")) {
+                        o.setAccepted(true);
+                        Data.save();
+                        System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣");
+                    } else
+                        System.out.println("𝖱𝖤𝖩𝖤𝖢𝖳𝖤𝖣");
                 }
-                if (s.toLowerCase().equals("exit"))
-                    return;
-                if (s.toLowerCase().equals("a")) {
-                    o.setAccepted(true);
-                    System.out.println("𝖠𝖢𝖢𝖤𝖯𝖳𝖤𝖣");
-                } else
-                    System.out.println("𝖱𝖤𝖩𝖤𝖢𝖳𝖤𝖣");
 
-            }
+        }
+        if(!b){
+            System.out.println("You haven't got any new orders.");
         }
         System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
         String s = input.nextLine();
@@ -132,7 +143,7 @@ public class Executor extends Employee {
         if(getOrders().size()==0)
             System.out.println("You haven't got any orders.");
         else {
-            for (Order o : getOrders()) {
+            for (Order o : orders) {
                 System.out.println(o);
             }
         }

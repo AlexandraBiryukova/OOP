@@ -9,14 +9,15 @@ public class Order implements Serializable {
         private String orderTitle;
         private Employee sender;
         private Executor executor;
-        private Date executionDate;
+        private String executionDate;
         private boolean completed = false;
         private boolean accepted=false;
         private String orderTextBody;
         public Order(){
+            executionDate=new Date().toLocaleString().substring(0, new Date().toLocaleString().length() - 3);
 
         }
-        public Order(String title , Employee e, Executor ex, Date d,String text){
+        public Order(String title , Employee e, Executor ex, String d,String text){
             orderTitle=title;
             sender=e;
             executor=ex;
@@ -30,7 +31,7 @@ public class Order implements Serializable {
         public void setOrderTitle(String orderTitle){ this.orderTitle = orderTitle;}
         public String getOrderTitle(){return orderTitle;}
         public Boolean isCompleted(){return completed;}
-        public Date getExecutionDate() { return executionDate; }
+        public String getExecutionDate() { return executionDate; }
 
     public Employee getSender() {
         return sender;
@@ -40,7 +41,7 @@ public class Order implements Serializable {
         this.completed = completed;
     }
 
-    public void setExecutionDate(Date executionDate) {
+    public void setExecutionDate(String executionDate) {
         this.executionDate = executionDate;
     }
 
@@ -83,8 +84,7 @@ public class Order implements Serializable {
 
         }
         public String toString(){
-            return "Order: " + orderTitle + "\nActivity: " + orderTextBody + "\nCommander: " + sender.getLogin()+
-                    "\nConfirmation state: " + confirmation() + "\nExecution Date: " + executionDate;
+            return "Order: " + orderTextBody + "\nConfirmation state: " + confirmation() + "\nExecution Date: " + executionDate;
         }
 
 }

@@ -135,7 +135,7 @@ public class Driver {
         }
     }
     private static void tActions(Teacher i) {
-        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View courses\n3. Add course file\n4. Delete course file\n5. View students of the course\n6. Put marks\n7. Sent order to IT support guy\n8. 𝗘𝗫𝗜𝗧");
+        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View courses\n3. Add course file\n4. Delete course file\n5. View students of the course\n6. Put marks\n7. Sent order to IT support guy\n8. Show messages\n9. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
         input.nextLine();
@@ -166,8 +166,12 @@ public class Driver {
             case 6:
                 break;
             case 7:
+                i.sendOrder();
                 break;
             case 8:
+                i.showMessages();
+                tActions(i);
+            case 9:
                 userMode(new Teacher());
 
 
@@ -565,7 +569,7 @@ public class Driver {
                 exActions(i);
                 break;
             case 4:
-                i.viewAcceptedOrd();
+                i.viewAllOrders();
                 exActions(i);
                 break;
             case 5:

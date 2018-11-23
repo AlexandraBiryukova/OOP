@@ -11,10 +11,7 @@ import sis3.Enum.TeacherStatuses;
 import sis3.Objects.Order;
 
 import java.io.*;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 
 public class Teacher extends Employee implements MakingOrder,ActionSaving {
     private TeacherStatuses status;
@@ -143,7 +140,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                 Data.save();
                 this.Saving(inf);
             } else if(inf.contains("received")){
-                System.out.println("SENDED");
+                System.out.println("SENT");
                 Data.save();
                 this.Saving(inf);
             }else if(inf.contains("deleted file")){
@@ -153,6 +150,11 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
             }
             else if(inf.contains("file")){
                 System.out.println("ADDED");
+                Data.save();
+                this.Saving(inf);
+            }
+            else if(inf.contains("order")){
+                System.out.println("SENT");
                 Data.save();
                 this.Saving(inf);
             }
@@ -173,6 +175,16 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
             System.out.println(t);
 
         }
+
+    }
+    public void showMessages(){
+        if(messages.size()>0) {
+            for (String s : messages) {
+                System.out.println("𝗆𝖾𝗌𝗌𝖺𝗀𝖾:");
+                System.out.println(s);
+            }
+        }else
+            System.out.println("No messages");
 
     }
 
@@ -430,10 +442,40 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
             System.out.println("This student is not yours");
 
     }
-    public void sendOrder(Executor ex,Order o){
-        Vector<Order> v=ex.getOrders();
-        v.add(o);
-        ex.setOrders(v);
+    public void sendOrder(){
+        if(Data.executors.size()>0) {
+            Scanner inp = new Scanner(System.in);
+            Order o = new Order();
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            System.out.print("ORDER TITLE:");
+            String s = inp.nextLine();
+            if (s.toLowerCase().equals("exit"))
+                return;
+            if (s.isEmpty())
+                s = "none";
+            o.setOrderTitle(s);
+            o.setSender(this);
+            System.out.println("ORDER TEXT:\n('.'- end of text)");
+            String res = "";
+            s = inp.nextLine();
+            res+=s;
+            while (!s.contains(".")) {
+                res = res + s + " ";
+                s = inp.nextLine();
+            }
+            if (res.isEmpty())
+                res = "none";
+            o.setOrderTextBody(res);
+            Executor e=Data.executors.first();
+            o.setExecutor(e);
+            e.save(" received an order from "+this.getLogin());
+            e.addOrder(o);
+            this.save("sent order to executor");
+
+
+        }else
+            System.out.println("There are no executors in our system. Sorry.");
+
 
     }
 
