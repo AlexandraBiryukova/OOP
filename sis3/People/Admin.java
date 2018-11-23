@@ -13,7 +13,7 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Admin extends Employee implements ActionSaving{
+public class Admin extends Employee{
     public Admin(){
         super();
     }
