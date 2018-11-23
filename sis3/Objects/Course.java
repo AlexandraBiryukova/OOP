@@ -49,7 +49,7 @@ public class Course implements Serializable,Cloneable,Comparable {
     }
 
     public void setCourseTitle(String courseTitle) {
-            this.courseTitle = courseTitle;
+        this.courseTitle = courseTitle;
 
     }
 
@@ -75,6 +75,15 @@ public class Course implements Serializable,Cloneable,Comparable {
             this.tutors = tutors;
 
 
+    }
+    public void addFile(CourseFile c){
+        files.add(c);
+    }
+    public void deleteFile(CourseFile c){
+        files.remove(c);
+    }
+    public void addStudent(Student s){
+        students.add(s);
     }
     public void addTeacher(Teacher s){
         tutors.add(s);

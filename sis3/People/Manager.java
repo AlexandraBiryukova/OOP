@@ -59,10 +59,13 @@ public class Manager extends Employee implements ActionSaving {
         Scanner inp=new Scanner(System.in);
             System.out.print("𝖢𝖮𝖴𝖱𝖲𝖤 𝖳𝖨𝖳𝖫𝖤:");
             String s=inp.nextLine();
-        while(s.isEmpty()) {
-            System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+        while(Data.courseNames.contains(s)||s.isEmpty()){
+            if(s.isEmpty())
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            else
+                System.out.println("Course with that title already exists in the system.\nChoose another title:");
             System.out.print("𝖢𝖮𝖴𝖱𝖲𝖤 𝖳𝖨𝖳𝖫𝖤:");
-            s = inp.nextLine();
+            s=inp.nextLine();
         }
         if (s.toLowerCase().equals("exit"))
             return;

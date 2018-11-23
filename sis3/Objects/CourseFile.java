@@ -3,7 +3,7 @@ package sis3.Objects;
 import java.io.Serializable;
 import java.io.*;
 
-public class CourseFile implements Serializable {
+public class CourseFile implements Serializable,Comparable {
     private File file;
     public CourseFile(){
     }
@@ -36,5 +36,14 @@ public class CourseFile implements Serializable {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+    if(o instanceof CourseFile) {
+        CourseFile c=(CourseFile)o;
+        return file.compareTo(c.file);
+    }
+    return -1;
     }
 }

@@ -12,6 +12,7 @@ import sis3.Objects.Order;
 
 import java.io.*;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -137,7 +138,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                 System.out.println("CHANGED");
                 Data.save();
                 this.Saving(inf);
-            }else if(inf.contains(" is added to the course")){
+            }else if(inf.contains(" is added to the course")||inf.contains("own")){
                 System.out.println("ADDED");
                 Data.save();
                 this.Saving(inf);
@@ -145,10 +146,20 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                 System.out.println("SENDED");
                 Data.save();
                 this.Saving(inf);
+            }else if(inf.contains("deleted file")){
+                System.out.println("DELETED");
+                Data.save();
+                this.Saving(inf);
+            }
+            else if(inf.contains("file")){
+                System.out.println("ADDED");
+                Data.save();
+                this.Saving(inf);
             }
             else{
                 System.out.println("DELETED");
                 Data.teachers.remove(this);
+                Data.save();
                 this.Saving(inf);
             }
         }
@@ -166,59 +177,241 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
     }
 
 
-    public void viewAllStudents(){
-        try {
 
-            FileInputStream out = new FileInputStream("data.ser");
-            ObjectInputStream os = new ObjectInputStream(out);
-            Data b=(Data) os.readObject();
-            for (Student s:b.students
-            ) {
-                System.out.println(s.toString());
-
+    public void viewStudentsofCourse(){
+        System.out.println("𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
+        String s;
+        Scanner inp=new Scanner(System.in);
+        if(Data.courses.size()>0) {
+            for (Course t : Data.courses) {
+                System.out.println(t);
             }
-
-            os.close();
-        } catch (Exception e) {
-            System.out.println("oops");
+            System.out.println("Choose the title (CASE SENSITIVE) of course from which you want to view students:");
+            boolean found = false;
+            while (!found) {
+                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                s = inp.nextLine();
+                while (s.isEmpty()) {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = inp.nextLine();
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                boolean b = false;
+                for (Course t : Data.courses) {
+                    if (t.getCourseTitle().equals(s)) {
+                        if(t.getStudents().size()>0) {
+                            for (Student ss : t.getStudents())
+                                System.out.println(ss);
+                        }else
+                            System.out.println("No registered students");
+                        b = true;
+                        break;
+                    }
+                }
+                if (b)
+                    found = true;
+                else {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                }
+            }
+        }else{
+            System.out.println("You haven't got any courses.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            s = inp.nextLine();
+            while(!s.toLowerCase().equals("exit")) {
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = inp.nextLine();
+            }
         }
 
-    }
-    public void viewStudentsofCourse(Course c){
-        if(Data.courses.contains(c))
-            System.out.println(c);
-        else
-            System.out.println("This course doesn't exist");
+
+
 
     }
 
     public void viewOwnCourses(){
-        for (Course s:courses) {
-            System.out.println(s.toString());
+        System.out.println("My courses:");
+        if(courses.size()>0) {
+            for (Course s : courses) {
+                System.out.println(s.toString());
 
+            }
+        }else{
+            System.out.println("You haven't got any courses");
         }
     }
     public void addCourse(Course s){
-            courses.add(s);
+        courses.add(s);
     }
-    public void addCourseFile(Course s, CourseFile c){
-        if(courses.contains(s)) {
-            TreeSet<CourseFile> ss = s.getFiles();
-            ss.add(c);
-            s.setFiles(ss);
+    public void addOwnCourse(){
+        Course c=new Course();
+        Scanner inp=new Scanner(System.in);
+        System.out.print("𝖢𝖮𝖴𝖱𝖲𝖤 𝖳𝖨𝖳𝖫𝖤:");
+        String s=inp.nextLine();
+        while(Data.courseNames.contains(s)||s.isEmpty()){
+            if(s.isEmpty())
+                System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            else
+                System.out.println("Course with that title already exists in the system.\nChoose another title:");
+            System.out.print("𝖢𝖮𝖴𝖱𝖲𝖤 𝖳𝖨𝖳𝖫𝖤:");
+            s=inp.nextLine();
         }
-        else
-            System.out.println("You can't add files to this course.");
+        if (s.toLowerCase().equals("exit"))
+            return;
+        c.setCourseTitle(s);
+        System.out.println("𝖣𝖤𝖯𝖠𝖱𝖳𝖬𝖤𝖭𝖳:");
+        System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
+        int a=inp.nextInt();
+        while(!(a>=1&&a<=8)){
+            System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
+            a=inp.nextInt();
+        }
+        inp.nextLine();
+        for(Departments d:Departments.values() ){
+            if(d.ordinal()==a-1){
+                c.setDepartment(d);
+                break;
+            }
+        }
+        c.addTeacher(this);
+        this.courses.add(c);
+        Data.courses.add(c);
+        Data.courseNames.add(c.getCourseTitle());
+        this.save(" added own course " + c.getCourseTitle());
+
+
+        }
+
+    public void addCourseFile(){
+        System.out.println("𝖸𝖮𝖴𝖱 𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
+        String s;
+        Scanner inp=new Scanner(System.in);
+        if(courses.size()>0) {
+            for (Course t : courses) {
+                System.out.println(t);
+            }
+            System.out.println("Choose the title (CASE SENSITIVE) of course you want to add file in:");
+            boolean found = false;
+            while (!found) {
+                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                s = inp.nextLine();
+                while (s.isEmpty()) {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = inp.nextLine();
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                boolean b = false;
+                for (Course t : courses) {
+                    if (t.getCourseTitle().equals(s)) {
+                        System.out.println("FILE NAME:");
+                        s=inp.nextLine();
+                        while(s.isEmpty()){
+                            System.out.println("Wrong text format\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                            System.out.print("𝖢𝖮𝖴𝖱𝖲𝖤 𝖳𝖨𝖳𝖫𝖤:");
+                            s=inp.nextLine();
+                        }
+                        if (s.toLowerCase().equals("exit"))
+                            return;
+                        CourseFile f=new CourseFile(new File(s));
+                        Data.courses.remove(t);
+                        t.addFile(f);
+                        Data.courses.add(t);
+                        this.save("added new file to the course "+t.getCourseTitle());
+                        b = true;
+                        break;
+                    }
+                }
+                if (b)
+                    found = true;
+                else {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                }
+            }
+        }else{
+            System.out.println("You haven't got any courses.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            s = inp.nextLine();
+            while(!s.toLowerCase().equals("exit")) {
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = inp.nextLine();
+            }
+        }
 
     }
-    public void deleteCourseFile(Course s,CourseFile c){
-        if(courses.contains(s)&&s.getFiles().contains(c)){
-            TreeSet<CourseFile> ss = s.getFiles();
-            ss.remove(c);
-            s.setFiles(ss);
+    public void deleteCourseFile(){
+        System.out.println("𝖸𝖮𝖴𝖱 𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
+        String s;
+        Scanner inp=new Scanner(System.in);
+        if(courses.size()>0) {
+            for (Course t : courses) {
+                System.out.println(t);
+            }
+            System.out.println("Choose the title of course you want to delete file from:");
+            boolean found = false;
+            while (!found) {
+                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                s = inp.nextLine();
+                while (s.isEmpty()) {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = inp.nextLine();
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                boolean b = false;
+                for (Course t : courses) {
+                    if (t.getCourseTitle().equals(s)) {
+                        if(t.getFiles().size()>0) {
+                            System.out.println("Choose the title of courseFile you want to delete :");
+                            boolean found2 = false;
+                            while (!found2) {
+                                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                                s = inp.nextLine();
+                                while (s.isEmpty()) {
+                                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                    s = inp.nextLine();
+                                }
+                                if (s.toLowerCase().equals("exit"))
+                                    return;
+                                boolean b2 = false;
+                                for (CourseFile cc : t.getFiles()) {
+                                    if (cc.getFile().toString().equals(s)) {
+                                        Data.courses.remove(t);
+                                        t.deleteFile(cc);
+                                        Data.courses.add(t);
+                                        this.save("deleted file from the course " + t.getCourseTitle());
+                                        b2 = true;
+                                        break;
+                                    }
+                                }
+                                if (b2)
+                                    found2 = true;
+                                else {
+                                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                }
+                            }
+                        }else
+                            System.out.println("There are no files in this course");
+
+                    }
+                    b=true;
+                    break;
+                }
+                if (b)
+                    found = true;
+                else {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                }
+            }
+        }else{
+            System.out.println("You haven't got any courses.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            s = inp.nextLine();
+            while(!s.toLowerCase().equals("exit")) {
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = inp.nextLine();
+            }
         }
-        else
-            System.out.println("You can't delete this file.");
+
+
     }
     public void setMark(Student s,Course c,Mark m){
         boolean found =false;

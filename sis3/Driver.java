@@ -1,7 +1,6 @@
 package sis3;
 
-import org.omg.CORBA.INTERNAL;
-import org.omg.PortableInterceptor.INACTIVE;
+
 import sis3.Objects.Order;
 import sis3.People.*;
 import sis3.Storage.Data;
@@ -34,6 +33,7 @@ public class Driver {
                 break;
             case "teacher":
                 System.out.println("Hello, Teacher!");
+                userMode(new Teacher());
                 break;
             case "executor":
                 System.out.println("Hello, Executor!");
@@ -134,33 +134,42 @@ public class Driver {
 
         }
     }
-
     private static void tActions(Teacher i) {
-        //System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View teachers\n3. View students\n4. Send message to the teacher\n5. 𝗘𝗫𝗜𝗧");
+        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View courses\n3. Add course file\n4. Delete course file\n5. View students of the course\n6. Put marks\n7. Sent order to IT support guy\n8. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
         input.nextLine();
-        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+        while (a<=1&&a>=9) {
             tActions(i);
         }
         switch (a) {
             case 1:
-
+                i.addOwnCourse();
                 tActions(i);
                 break;
             case 2:
+                i.viewOwnCourses();
                 tActions(i);
                 break;
             case 3:
-
+                i.addCourseFile();
                 tActions(i);
                 break;
             case 4:
-
+                i.deleteCourseFile();
                 tActions(i);
                 break;
             case 5:
-                userMode(i);
+                i.viewStudentsofCourse();
+                tActions(i);
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                userMode(new Teacher());
+
 
         }
 
@@ -221,7 +230,7 @@ public class Driver {
                 mActions(i);
                 break;
             case 5:
-                userMode(i);
+                userMode(new Manager());
 
         }
 
@@ -283,7 +292,7 @@ public class Driver {
                 stActions(i);
                 break;
             case 4:
-                userMode(i);
+                userMode(new Student());
 
         }
 
@@ -407,7 +416,7 @@ public class Driver {
                 adminActions(i);
                 break;
             case 4:
-                userMode(i);
+                userMode(new Admin());
                 break;
         }
 
@@ -560,7 +569,7 @@ public class Driver {
                 exActions(i);
                 break;
             case 5:
-                userMode(i);
+                userMode(new Executor());
                 break;
         }
 
