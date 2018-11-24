@@ -113,28 +113,28 @@ public class Course implements Serializable,Cloneable,Comparable {
     public int compareTo(Object o) {
         if(o instanceof Course){
             Course c=(Course)o;
-            if(this.courseTitle.compareTo(c.courseTitle)==0) {
-                if (department == c.department) {
-                    if (tutors.equals(c.getTutors())) {
-                        if (students.equals(c.getStudents())) {
-                            if (files.equals(c.getFiles())) {
-                                return 0;
-                            }
-                            if (files.size() > c.files.size())
-                                return 1;
-                            return -1;
-                        }
-                        if (students.size() > c.students.size())
-                            return 1;
-                        return -1;
-
-                    }
-                    if (tutors.size() > c.tutors.size())
-                        return 1;
-                    return -1;
-                }
-                return department.compareTo(c.department);
-            }
+//            if(this.courseTitle.compareTo(c.courseTitle)==0) {
+//                if (department == c.department) {
+//                    if (tutors.equals(c.getTutors())) {
+//                        if (students.equals(c.getStudents())) {
+//                            if (files.equals(c.getFiles())) {
+//                                return 0;
+//                            }
+//                            if (files.size() > c.files.size())
+//                                return 1;
+//                            return -1;
+//                        }
+//                        if (students.size() > c.students.size())
+//                            return 1;
+//                        return -1;
+//
+//                    }
+//                    if (tutors.size() > c.tutors.size())
+//                        return 1;
+//                    return -1;
+//                }
+//                return department.compareTo(c.department);
+//            }
             return this.courseTitle.compareTo(c.courseTitle);
         }
         return -1;

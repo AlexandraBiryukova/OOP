@@ -1,6 +1,7 @@
 package sis3;
 
 
+import sis3.Objects.Course;
 import sis3.Objects.Order;
 import sis3.People.*;
 import sis3.Storage.Data;
@@ -621,8 +622,9 @@ public class Driver {
 
     public static void main(String[] args){
         Data.get();
-        System.out.println(Data.courses.size());
+        //System.out.println(Data.courses.size());
         starting();
+        //System.out.println(Data.courses.last().compareTo(Data.courses.first()));
 
 
 

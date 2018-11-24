@@ -401,10 +401,9 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                                         break;
                                     }
                                 }
-                                if (b2)
+                                if (b2) {
                                     found2 = true;
-                                else {
-                                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                    b=true;
                                 }
                             }
                         } else {
@@ -499,7 +498,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                                                 this.setMark(t, ts);
                                             } catch (MarkException m) {
                                                 b3=true;
-                                                m.getMessage();
+                                                System.out.println(m.getMessage());
                                                 System.out.println("PRESS ANY KEY TO TRY AGAIN");
                                                 s = inp.nextLine();
                                             }finally {
