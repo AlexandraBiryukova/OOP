@@ -83,8 +83,16 @@ public class Student extends Employee{
                         System.out.println("You have been already registered to this course");
                         b=true;
                     }else {
-                        this.courses.add(t);
+
                         t.addStudent(this);
+                        this.courses.add(t);
+                        for(Teacher te:Data.teachers){
+                            for(Course ce:te.getCourses()){
+                                if(ce.getCourseTitle().equals(t.getCourseTitle()))
+                                    te.getCourses().remove(ce);
+                                te.addCourse(t);
+                            }
+                        }
                         String inf = " has been registered to the " + t.getCourseTitle() + " course";
                         this.Saving(inf);
                         Data.save();
@@ -142,7 +150,6 @@ public class Student extends Employee{
                 if(m.getCourse().getCourseTitle().equals(s.getCourseTitle())){
                     System.out.print("⊢"+m+"⊣ ");
                     b=true;
-
                 }
             }
             if(!b){
@@ -154,6 +161,7 @@ public class Student extends Employee{
         if(courses.size()>0) {
             for (Course s :courses) {
                 viewMarkForCourse(s);
+                System.out.println();
             }
         }else
             System.out.println("You are not registered to any courses");
@@ -191,7 +199,11 @@ public class Student extends Employee{
                 System.out.println("CHANGED");
                 Data.save();
                 this.Saving(inf);
-            }else {
+            }if(inf.contains("mark")){
+                Data.save();
+                this.Saving(inf);
+            }
+            else {
                 System.out.println("DELETED");
                 Data.students.remove(this);
                 this.Saving(inf);

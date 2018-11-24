@@ -402,11 +402,11 @@ public class Driver {
 
     }
     private static void adminActions(Admin i) {
-        System.out.println("SELECT COMMAND CODE:\n1. Add user\n2. Delete user\n3. Change user information\n4. 𝗘𝗫𝗜𝗧");
+        System.out.println("SELECT COMMAND CODE:\n1. Add user\n2. Delete user\n3. Change user information\n4. View users\n5. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
         input.nextLine();
-        while (a!=1&&a!=2&&a!=3&&a!=4) {
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
             adminActions(i);
         }
         switch (a){
@@ -423,10 +423,45 @@ public class Driver {
                 adminActions(i);
                 break;
             case 4:
+                adminViewAc(i);
+                adminActions(i);
+                break;
+            case 5:
                 userMode(new Admin());
                 break;
         }
 
+    }
+
+    private static void adminViewAc(Admin i) {
+        System.out.println("Choose the code of users you want to view:\n1. STUDENT\n2. TEACHER\n3. MANAGER\n4. EXECUTOR\n5. 𝗘𝗫𝗜𝗧");
+        System.out.print("𝖢𝖮𝖣𝖤:");
+        int a=input.nextInt();
+        while (a!=1&&a!=2&&a!=3&&a!=4&&a!=5) {
+            a=input.nextInt();
+        }
+        input.nextLine();
+        //Admin i=new Admin();
+        switch (a){
+            case 1:
+                i.viewUser(new Student());
+                adminViewAc(i);
+                break;
+            case 2:
+                i.viewUser(new Teacher());
+                adminViewAc(i);
+                break;
+            case 3:
+                i.viewUser(new Manager());
+                adminViewAc(i);
+                break;
+            case 4:
+                i.viewUser(new Executor());
+                adminViewAc(i);
+                break;
+            case 5:
+                adminActions(i);
+        }
     }
     private static void adminChangeInfo(Admin i) {
         System.out.println("Choose the code of user whose information" +

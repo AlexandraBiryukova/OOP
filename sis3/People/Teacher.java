@@ -1,6 +1,7 @@
 package sis3.People;
 
 import sis3.Interfaces.ActionSaving;
+import sis3.MarkException;
 import sis3.Storage.Data;
 import sis3.Enum.Departments;
 import sis3.Interfaces.MakingOrder;
@@ -155,6 +156,11 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
             }
             else if(inf.contains("order")){
                 System.out.println("SENT");
+                Data.save();
+                this.Saving(inf);
+            }
+            else if(inf.contains("mark")){
+                System.out.println("NEW MARK HAS BEEN ADDED");
                 Data.save();
                 this.Saving(inf);
             }
@@ -425,8 +431,126 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
 
 
     }
-    public void putMarks(){
-        
+    public void setMark(Course c,Student s)throws MarkException {
+        Scanner inp=new Scanner(System.in);
+        System.out.println("Mark:");
+        double d=inp.nextDouble();
+        if(d<0||d>100)
+            throw new MarkException();
+        else{
+            Data.students.remove(s);
+            Mark m=new Mark(d,c);
+            Vector<Mark> v=s.getMarks();
+            v.add(m);
+            s.setMarks(v);
+            Data.students.add(s);
+
+
+        }
+
+
+    }
+    public void putMarks() {
+        System.out.println("𝖸𝖮𝖴𝖱 𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
+        String s;
+        Scanner inp=new Scanner(System.in);
+        if(courses.size()>0) {
+            for (Course t : courses) {
+                System.out.println(t);
+            }
+            System.out.println("Choose the title (CASE SENSITIVE) of course:");
+            boolean found = false;
+            while (!found) {
+                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                s = inp.nextLine();
+                while (s.isEmpty()) {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = inp.nextLine();
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                boolean b = false;
+                for (Course t : courses) {
+                    if (t.getCourseTitle().equals(s)) {
+                        System.out.println("𝖲𝖳𝖴𝖣𝖤𝖭𝖳𝖲:");
+                        System.out.println(t.getStudents().size());
+                        if(t.getStudents().size()>0) {
+                            for (Student st : t.getStudents()) {
+                                System.out.println("𝗅𝗈𝗀𝗂𝗇:" + st.getLogin() + " " + st);
+                            }
+                            System.out.println("Choose the login (CASE SENSITIVE) of student:");
+                            boolean found2 = false;
+                            while (!found2) {
+                                System.out.print("𝖫𝖮𝖦𝖨𝖭: ");
+                                s = inp.nextLine();
+                                while (s.isEmpty()) {
+                                    System.out.println("UNKNOWN LOGIN\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                                    s = inp.nextLine();
+                                }
+                                if (s.toLowerCase().equals("exit"))
+                                    return;
+                                boolean b2 = false;
+                                for (Student ts : t.getStudents()) {
+                                    if (ts.getLogin().equals(s)) {
+                                        b2=true;
+                                        boolean b3=false;
+                                        while(!b3) {
+                                            try {
+                                                this.setMark(t, ts);
+                                            } catch (MarkException m) {
+                                                b3=true;
+                                                m.getMessage();
+                                                System.out.println("PRESS ANY KEY TO TRY AGAIN");
+                                                s = inp.nextLine();
+                                            }finally {
+                                                if(b3)
+                                                    b3=false;
+                                                else{
+                                                    this.save("added new mark to student "+ts.getName()+" "+ts.getSurname());
+                                                    ts.save("received new mark in course "+t.getCourseTitle());
+                                                    b2=true;
+                                                    b3=true;
+                                                    b=true;
+                                                }
+                                            }
+
+                                        }
+
+
+                                    }
+                                }
+                                if(b2)
+                                    found2=true;
+                            }
+
+                        }else {
+                            System.out.println("There are no students in this course");
+                            while(!s.toLowerCase().equals("exit")) {
+                                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                                s = inp.nextLine();
+                            }
+                            return;
+                        }
+
+                    }
+                }
+                if (b)
+                    found = true;
+                else {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                }
+            }
+        }else{
+            System.out.println("You haven't got any courses.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            s = inp.nextLine();
+            while(!s.toLowerCase().equals("exit")) {
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = inp.nextLine();
+            }
+        }
+
+
+
     }
     public void sendOrder(){
         if(Data.executors.size()>0) {

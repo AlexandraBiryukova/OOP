@@ -924,6 +924,49 @@ public class Admin extends Employee{
         }
         Data.save();
     }
+    public void viewUser(Object o){
+        if(o instanceof Student){
+            if(Data.students.size()>0){
+                for(Student s:Data.students){
+                    System.out.println(s);
+                }
+            }else
+                System.out.println("There are no registered students in the system");
+        }
+        if(o instanceof Teacher){
+            if(Data.teachers.size()>0){
+                for(Teacher s:Data.teachers){
+                    System.out.println(s);
+                }
+            }else
+                System.out.println("There are no registered teachers in the system");
+        }
+        if(o instanceof Manager){
+            if(Data.managers.size()>0){
+                for(Manager s:Data.managers){
+                    System.out.println(s);
+                }
+            }else
+                System.out.println("There are no registered managers in the system");
+        }
+        if(o instanceof Executor){
+            if(Data.executors.size()>0){
+                for(Executor s:Data.executors){
+                    System.out.println(s);
+                }
+            }else
+                System.out.println("There are no registered executors in the system");
+        }
+        System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+        Scanner input=new Scanner(System.in);
+        String s = input.nextLine();
+        while(!s.toLowerCase().equals("exit")) {
+            System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+            s = input.nextLine();
+        }
+
+
+    }
 
 
 
