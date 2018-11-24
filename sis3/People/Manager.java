@@ -215,10 +215,10 @@ public class Manager extends Employee implements ActionSaving {
                             text+=s;
                         while(!s.contains(".")){
                             s=inp.nextLine();
-                            text+=s;
+                            text+=s+" ";
                         }
                         t.addMess(text);
-                        this.Saving(" sended message to  " + t.getName()+" "+t.getSurname());
+                        this.Saving(" sent message to  " + t.getName()+" "+t.getSurname());
                         t.save(" received new message");
                         b = true;
                         break;

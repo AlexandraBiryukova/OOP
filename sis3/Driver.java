@@ -164,9 +164,12 @@ public class Driver {
                 tActions(i);
                 break;
             case 6:
+                i.putMarks();
+                tActions(i);
                 break;
             case 7:
                 i.sendOrder();
+                tActions(i);
                 break;
             case 8:
                 i.showMessages();
@@ -558,7 +561,7 @@ public class Driver {
         switch (a){
             case 1:
                 i.viewNewOrders();
-                    exActions(i);
+                exActions(i);
                 break;
             case 2:
                 i.viewDoneOrd();

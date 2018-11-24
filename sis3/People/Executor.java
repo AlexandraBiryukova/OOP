@@ -93,8 +93,6 @@ public class Executor extends Employee {
         while(!s.toLowerCase().equals("exit")) {
             System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
             s = input.nextLine();
-        }for(Order o: orders){
-            System.out.println(o);
         }
     }
     public void doOrder(Order o){

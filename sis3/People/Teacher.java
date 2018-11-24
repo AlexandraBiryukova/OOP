@@ -293,7 +293,6 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
 
 
         }
-
     public void addCourseFile(){
         System.out.println("𝖸𝖮𝖴𝖱 𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
         String s;
@@ -372,7 +371,8 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                 boolean b = false;
                 for (Course t : courses) {
                     if (t.getCourseTitle().equals(s)) {
-                        if(t.getFiles().size()>0) {
+                        System.out.println(t.getFiles().size());
+                        if (t.getFiles().size() > 0) {
                             System.out.println("Choose the title of courseFile you want to delete :");
                             boolean found2 = false;
                             while (!found2) {
@@ -401,18 +401,18 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                                     System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
                                 }
                             }
-                        }else
+                        } else {
                             System.out.println("There are no files in this course");
-
+                            b = true;
+                            break;
+                        }
                     }
-                    b=true;
-                    break;
                 }
                 if (b)
                     found = true;
-                else {
+                else
                     System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-                }
+
             }
         }else{
             System.out.println("You haven't got any courses.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
@@ -425,22 +425,8 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
 
 
     }
-    public void setMark(Student s,Course c,Mark m){
-        boolean found =false;
-        for(Course cc:this.getCourses()){
-            if(cc.toString().equals(c.toString())) {
-                if (cc.getStudents().contains(s)) {
-                    Vector<Mark> ss = s.getMarks();
-                    ss.add(m);
-                    s.setMarks(ss);
-                    found = true;
-                    break;
-                }
-            }
-        }
-        if(!found)
-            System.out.println("This student is not yours");
-
+    public void putMarks(){
+        
     }
     public void sendOrder(){
         if(Data.executors.size()>0) {

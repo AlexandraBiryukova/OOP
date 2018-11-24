@@ -95,7 +95,7 @@ public class Course implements Serializable,Cloneable,Comparable {
 
     @Override
     public String toString() {
-        return "𝗍𝗂𝗍𝗅𝖾: "+courseTitle +" 𝖽𝖾𝗉𝖺𝗋𝗍𝗆𝖾𝗇𝗍: "+department+ "\n𝗍𝖾𝖺𝖼𝗁𝖾𝗋𝗌:\n"+tutors.toString()+"\n𝖿𝗂𝗅𝖾𝗌:\n"+ files.toString();
+        return "𝗍𝗂𝗍𝗅𝖾: "+courseTitle +"\n𝖽𝖾𝗉𝖺𝗋𝗍𝗆𝖾𝗇𝗍: "+department+ "\n𝗍𝖾𝖺𝖼𝗁𝖾𝗋𝗌: "+tutors.toString()+"\n𝖿𝗂𝗅𝖾𝗌: "+ files.toString();
     }
 
     @Override
