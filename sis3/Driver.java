@@ -123,20 +123,13 @@ public class Driver {
         }
         if(foundP)
             tActions(a);
-        if(!foundP&&!foundL){
-            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-            String choise=input.nextLine();
-            while(!choise.toLowerCase().equals("exit")) {
-                choise=input.nextLine();
-                System.out.println("𝖤𝖷𝖨𝖳");
-            }
-            starting();
-
-
+        if(!foundP||!foundL) {
+            System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
+            userMode(new Teacher());
         }
     }
     private static void tActions(Teacher i) {
-        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View courses\n3. Add course file\n4. Delete course file\n5. View students of the course\n6. Put marks\n7. Sent order to IT support guy\n8. Show messages\n9. 𝗘𝗫𝗜𝗧");
+        System.out.println("SELECT COMMAND CODE:\n1. Add course\n2. View courses\n3. Add course file\n4. Delete course file\n5. View students of the course\n6. Put marks\n7. Sent order to IT support guy\n8. Show messages\n9. Join course\n10. 𝗘𝗫𝗜𝗧");
         System.out.print("𝖢𝖮𝖣𝖤:");
         int a=input.nextInt();
         input.nextLine();
@@ -176,6 +169,9 @@ public class Driver {
                 i.showMessages();
                 tActions(i);
             case 9:
+                i.joinCourse();
+                tActions(i);
+            case 10:
                 userMode(new Teacher());
 
 
@@ -200,14 +196,9 @@ public class Driver {
         }
         if(foundP)
             mActions(a);
-        if(!foundP&&!foundL){
-            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-            String choise=input.nextLine();
-            while(!choise.toLowerCase().equals("exit")) {
-                choise=input.nextLine();
-                System.out.println("𝖤𝖷𝖨𝖳");
-            }
-            starting();
+        if(!foundP||!foundL){
+                System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
+                userMode(new Manager());
 
 
         }
@@ -261,14 +252,9 @@ public class Driver {
         }
         if(foundP)
             stActions(a);
-        if(!foundP&&!foundL){
-            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-            String choise=input.nextLine();
-            while(!choise.toLowerCase().equals("exit")) {
-                choise=input.nextLine();
-                System.out.println("𝖤𝖷𝖨𝖳");
-            }
-            starting();
+        if(!foundP||!foundL){
+            System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
+            userMode(new Student());
 
 
         }
@@ -570,20 +556,9 @@ public class Driver {
         }
         if(foundP)
             exActions(a);
-        if(!foundP&&!foundL){
-            System.out.println("You haven't been registered yet.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
-            String choise=input.nextLine();
-            while(!choise.toLowerCase().equals("exit")) {
-                choise=input.nextLine();
-                System.out.println("𝖤𝖷𝖨𝖳");
-            }
-            starting();
-
-
-        }
-        if(!foundP&&foundL) {
+        if(!foundP||!foundL) {
             System.out.println("𝚆𝚁𝙾𝙽𝙶 𝙻𝙾𝙶𝙸𝙽 𝙾𝚁 𝙿𝙰𝚂𝚂𝚆𝙾𝚁𝙳");
-            userMode(a);
+            userMode(new Manager());
         }
     }
     private static void exActions(Executor i) {

@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Admin extends Employee{
     public Admin(){
@@ -348,6 +349,18 @@ public class Admin extends Employee{
                     boolean b = false;
                     for (Teacher t : Data.teachers) {
                         if (t.getLogin().equals(s)) {
+                            for(Course c:t.getCourses()){
+                                for(Student st:c.getStudents()){
+                                    TreeSet<Teacher> t1=c.getTutors();
+                                    TreeSet<Course> c1=st.getCourses();
+                                    c1.remove(c);
+                                    t1.remove(t);
+                                    c.setTutors(t1);
+                                    c1.add(c);
+                                    st.setCourses(c1);
+
+                                }
+                            }
                             this.Saving(" deleted teacher " + t.getLogin());
                             t.save(" is deleted from to system ");
                             b = true;
@@ -383,6 +396,12 @@ public class Admin extends Employee{
                     boolean b = false;
                     for (Student t : Data.students) {
                         if (t.getLogin().equals(s)) {
+                            Data.students.remove(t);
+                            for(Course c:Data.courses){
+                                TreeSet<Student> s1=c.getStudents();
+                                s1.remove(t);
+                                c.setStudents(s1);
+                            }
                             this.Saving(" deleted student " + t.getLogin());
                             t.save(" is deleted from to system ");
                             b = true;

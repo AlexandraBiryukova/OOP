@@ -283,8 +283,9 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
         while(!(a>=1&&a<=8)){
             System.out.println("1.FIT\n2.BS\n3.FGE\n4.CMC\n5.KMA\n6.FGOGI\n7.ISE\n8.NONE");
             a=inp.nextInt();
+            inp.nextLine();
         }
-        inp.nextLine();
+
         for(Departments d:Departments.values() ){
             if(d.ordinal()==a-1){
                 c.setDepartment(d);
@@ -434,6 +435,7 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
         Scanner inp=new Scanner(System.in);
         System.out.println("Mark:");
         double d=inp.nextDouble();
+        inp.nextLine();
         if(d<0||d>100)
             throw new MarkException();
         else{
@@ -446,6 +448,58 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
 
 
         }
+
+
+    }
+    public void joinCourse(){
+        System.out.println("𝖢𝖮𝖴𝖱𝖲𝖤𝖲:");
+        String s;
+        Scanner inp=new Scanner(System.in);
+        if(Data.courses.size()>0) {
+            for (Course t : Data.courses) {
+                System.out.println(t);
+            }
+            System.out.println("Choose the title (CASE SENSITIVE) of course:");
+            boolean found = false;
+            while (!found) {
+                System.out.print("𝖳𝖨𝖳𝖫𝖤: ");
+                s = inp.nextLine();
+                while (s.isEmpty()) {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                    s = inp.nextLine();
+                }
+                if (s.toLowerCase().equals("exit"))
+                    return;
+                boolean b = false;
+                for (Course t : Data.courses) {
+                    if (t.getCourseTitle().equals(s)) {
+                        if(t.getTutors().contains(this)) {
+                            System.out.println("You had already joined this course");
+                            b=true;
+                            break;
+                        }
+                        this.addCourse(t);
+                        t.addTeacher(this);
+                        b=true;
+                        break;
+                    }
+                }
+                if (b)
+                    found = true;
+                else {
+                    System.out.println("UNKNOWN TITLE\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+                }
+            }
+        }else{
+            System.out.println("There are no courses in the system.\n(𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳)");
+            s = inp.nextLine();
+            while(!s.toLowerCase().equals("exit")) {
+                System.out.println("𝖯𝖱𝖨𝖭𝖳 𝗘𝗫𝗜𝗧 𝖳𝖮 𝖤𝖷𝖨𝖳");
+                s = inp.nextLine();
+            }
+        }
+
+
 
 
     }
@@ -494,28 +548,21 @@ public class Teacher extends Employee implements MakingOrder,ActionSaving {
                                         b2=true;
                                         boolean b3=false;
                                         while(!b3) {
+                                            b3=true;
                                             try {
                                                 this.setMark(t, ts);
                                             } catch (MarkException m) {
-                                                b3=true;
+                                                b3 = false;
                                                 System.out.println(m.getMessage());
                                                 System.out.println("PRESS ANY KEY TO TRY AGAIN");
                                                 s = inp.nextLine();
-                                            }finally {
-                                                if(b3)
-                                                    b3=false;
-                                                else{
-                                                    this.save("added new mark to student "+ts.getName()+" "+ts.getSurname());
-                                                    ts.save("received new mark in course "+t.getCourseTitle());
-                                                    b2=true;
-                                                    b3=true;
-                                                    b=true;
-                                                }
                                             }
-
                                         }
-
-
+                                        this.save("added new mark to student "+ts.getName()+" "+ts.getSurname());
+                                        ts.save(" received new mark in course "+t.getCourseTitle());
+                                        b2=true;
+                                        b=true;
+                                        break;
                                     }
                                 }
                                 if(b2)

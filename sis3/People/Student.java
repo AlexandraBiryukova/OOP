@@ -83,14 +83,14 @@ public class Student extends Employee{
                         System.out.println("You have been already registered to this course");
                         b=true;
                     }else {
-
                         t.addStudent(this);
                         this.courses.add(t);
                         for(Teacher te:Data.teachers){
                             for(Course ce:te.getCourses()){
-                                if(ce.getCourseTitle().equals(t.getCourseTitle()))
+                                if(ce.getCourseTitle().equals(t.getCourseTitle())) {
                                     te.getCourses().remove(ce);
-                                te.addCourse(t);
+                                    te.addCourse(t);
+                                }
                             }
                         }
                         String inf = " has been registered to the " + t.getCourseTitle() + " course";
